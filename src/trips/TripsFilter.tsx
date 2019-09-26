@@ -13,17 +13,19 @@ const TripsFilter: React.FC<IProps> = ({ onFilter, onVisibleToggle, defaultFilte
 
   useEffect(() => {
     onVisibleToggle(visibility)
-  }, [visibility])
+  }, [visibility, onVisibleToggle])
 
   useEffect(() => {
     onFilter(filter)
-  }, [filter])
+  }, [filter, onFilter])
 
   return (
     <div>
       <input type="text" onChange={(e) => toggleFilter(e.target.value)} />
       <label htmlFor="toggleVisibility">Show only my trips</label>
       <input type="checkbox" checked={visibility} onChange={() => toggleVisibility(!visibility)} />
+
+      <button onClick={() => window.print()}>Print next month plan</button>
     </div>
   )
 }

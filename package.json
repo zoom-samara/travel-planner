@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.2.6",
     "connected-react-router": "^6.5.2",
     "date-fns": "^2.3.0",
     "firebase": "^6.6.2",
@@ -47,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.9",
     "@types/history": "^4.7.3",
     "@types/jest": "^24.0.18",
     "@types/lodash": "^4.14.139",

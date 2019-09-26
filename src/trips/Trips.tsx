@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import AddTrip from './AddTrip'
+import cn from 'classnames'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { compareAsc } from 'date-fns'
+import { compareAsc, isAfter, differenceInDays, addMonths, isBefore } from 'date-fns'
 import { tripsSelector } from './tripsSelector'
 import useThunkDispatch from '../common/useThunkDispatch'
 import { getTripsList } from './tripsActions'
 import { ITrip } from '../types/trip'
 import { userSelector } from '../auth/authSelector'
 import TripsFilter from './TripsFilter'
+import AddTrip from './AddTrip'
 
 const Trips: React.FC = () => {
   const [showMyTrips, toggleMyTrips] = useState(true)
@@ -36,11 +37,22 @@ const Trips: React.FC = () => {
           .filter((trip) => trip.destination.toLowerCase().includes(filter.toLowerCase()))
           .sort((a, b) => compareAsc(new Date(a.startDate), new Date(b.startDate)))
           .map((trip: ITrip) => (
-            <li key={trip.id}>
+            <li
+              key={trip.id}
+              className={cn('item', {
+                '-next-month':
+                  isAfter(new Date(trip.startDate), new Date()) &&
+                  isBefore(new Date(trip.startDate), addMonths(new Date(), 1)),
+              })}
+            >
               <Link to={`/service/trip/${trip.id}`}>
                 {trip.startDate}
                 {trip.destination}
               </Link>
+
+              {isAfter(new Date(trip.startDate), new Date()) && (
+                <div>Days before start: {differenceInDays(new Date(trip.startDate), new Date())}</div>
+              )}
               {trip.uid === user.uid && <span> | your</span>}
             </li>
           ))}

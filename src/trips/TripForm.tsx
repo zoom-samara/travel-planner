@@ -13,7 +13,7 @@ const TripForm: React.FC<FormikProps<INewTrip>> = ({ isSubmitting, isValid, isVa
     </div>
     <div>
       <label htmlFor="startDate">Start Date</label>
-      <Field type="date" name="startDate" min={format(new Date(), 'yyyy-MM-dd')} required />
+      <Field type="date" name="startDate" min1={format(new Date(), 'yyyy-MM-dd')} required />
     </div>
     <div>
       <label htmlFor="endDate">End Date</label>
