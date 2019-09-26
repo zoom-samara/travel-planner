@@ -27,7 +27,7 @@ const Trip: React.FC<RouteComponentProps<IRouteParams>> = ({ match }) => {
   return (
     <div>
       <h1>{trip.destination}</h1>
-      {trip.uid === user.uid && <EditTrip id={id} />}
+      {trip.uid === user.uid && <EditTrip />}
       {new Date(trip.startDate).toLocaleDateString()}
       {new Date(trip.endDate).toLocaleDateString()}
       {trip.comment}

@@ -5,6 +5,7 @@ import 'firebase/firestore'
 
 import { Action, ThunkAction } from '../types/common'
 import { INewTrip, ITrip } from '../types/trip'
+import history from '../history'
 
 export const SET_TRIP = 'TRIP/SET'
 export type SET_TRIP = Action<ITrip>
@@ -33,4 +34,15 @@ export const requestUpdateTrip = (id: string, data: INewTrip): ThunkAction<Promi
     .doc(id)
     .update(data)
     .then(() => dispatch(requestTripDetails(id)))
+    .catch((err) => Promise.reject(err))
+
+export const requestRemoveTrip = (id: string): ThunkAction<Promise<void>> => async (dispatch) =>
+  firebase
+    .firestore()
+    .collection('trips')
+    .doc(id)
+    .delete()
+    .then(function() {
+      history.push('/service/trips')
+    })
     .catch((err) => Promise.reject(err))

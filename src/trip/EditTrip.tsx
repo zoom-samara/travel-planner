@@ -3,38 +3,46 @@ import { useSelector } from 'react-redux'
 import { tripSelector } from './tripSelector'
 import { Formik } from 'formik'
 import { ITrip } from '../types/trip'
-import { requestUpdateTrip } from './tripActions'
+import { requestRemoveTrip, requestUpdateTrip } from './tripActions'
 import useThunkDispatch from '../common/useThunkDispatch'
 import TripForm from '../trips/TripForm'
 
-interface IProps {
-  id: string
-}
-
-const EditTrip: React.FC<IProps> = () => {
+const EditTrip: React.FC = () => {
   const trip: ITrip = useSelector(tripSelector)
   const dispatch = useThunkDispatch()
+  const onRemove = () => {
+    try {
+      dispatch(requestRemoveTrip(trip.id))
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   return (
-    <Formik
-      initialValues={{
-        destination: trip.destination,
-        startDate: trip.startDate,
-        endDate: trip.endDate,
-        comment: trip.comment,
-      }}
-      onSubmit={(values, { setSubmitting, setStatus }) => {
-        setSubmitting(true)
-        dispatch(requestUpdateTrip(trip.id, values))
-          .then(() => {
-            console.log('form submitted')
-          })
-          .catch(({ message }) => setStatus(message))
-          .finally(() => setSubmitting(false))
-      }}
-    >
-      {TripForm}
-    </Formik>
+    <div>
+      <Formik
+        initialValues={{
+          destination: trip.destination,
+          startDate: trip.startDate,
+          endDate: trip.endDate,
+          comment: trip.comment,
+        }}
+        onSubmit={(values, { setSubmitting, setStatus }) => {
+          setSubmitting(true)
+          dispatch(requestUpdateTrip(trip.id, values))
+            .then(() => {
+              console.log('form submitted')
+            })
+            .catch(({ message }) => setStatus(message))
+            .finally(() => setSubmitting(false))
+        }}
+      >
+        {TripForm}
+      </Formik>
+      <button type="button" onClick={() => onRemove()}>
+        Remove Trip
+      </button>
+    </div>
   )
 }
 

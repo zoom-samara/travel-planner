@@ -9,7 +9,7 @@ const Signup: React.FC = () => {
 
   return (
     <Formik
-      initialValues={{ email: 'me4@ebulgakov.com', password: 'password', displayName: '' }}
+      initialValues={{ email: '', password: '', displayName: '' }}
       onSubmit={async (values, { setSubmitting, setStatus }) => {
         setSubmitting(true)
         try {
@@ -24,9 +24,9 @@ const Signup: React.FC = () => {
         <Form>
           <h1>SignUp</h1>
           {status && <div>{status}</div>}
-          <Field type="email" name="email" />
-          <Field type="text" name="displayName" />
-          <Field type="password" name="password" />
+          <Field type="email" name="email" required />
+          <Field type="text" name="displayName" required />
+          <Field type="password" name="password" required />
           <button type="submit" disabled={isSubmitting}>
             Reg me
           </button>

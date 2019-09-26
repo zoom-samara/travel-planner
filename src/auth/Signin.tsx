@@ -24,8 +24,8 @@ const Signin: React.FC = () => {
         <Form>
           <h1>Login</h1>
           {status && <div>{status}</div>}
-          <Field type="email" name="email" />
-          <Field type="password" name="password" />
+          <Field type="email" name="email" required />
+          <Field type="password" name="password" required />
           <button type="submit" disabled={isSubmitting}>
             Auth me
           </button>
