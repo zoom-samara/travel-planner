@@ -21,7 +21,7 @@ const Trips: React.FC = () => {
   return (
     <div>
       <ul>
-        {list.map((trip: ITrip, idx) => (
+        {list.map((trip: ITrip) => (
           <li key={trip.id}>
             <Link to={`/service/trip/${trip.id}`}>{trip.destination}</Link>
             {trip.uid === user.uid && <span> | your</span>}
