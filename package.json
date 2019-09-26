@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "connected-react-router": "^6.5.2",
+    "date-fns": "^2.3.0",
     "firebase": "^6.6.2",
     "formik": "^1.5.8",
     "history": "^4.10.1",

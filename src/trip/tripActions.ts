@@ -4,7 +4,7 @@ import * as firebase from 'firebase/app'
 import 'firebase/firestore'
 
 import { Action, ThunkAction } from '../types/common'
-import { ITrip } from '../types/trip'
+import { INewTrip, ITrip } from '../types/trip'
 
 export const SET_TRIP = 'TRIP/SET'
 export type SET_TRIP = Action<ITrip>
@@ -26,7 +26,7 @@ export const requestTripDetails = (id: string): ThunkAction<Promise<void>> => as
     })
     .catch((err) => Promise.reject(err))
 
-export const requestUpdateTrip = (id: string, data: ITrip): ThunkAction<Promise<void>> => async (dispatch) =>
+export const requestUpdateTrip = (id: string, data: INewTrip): ThunkAction<Promise<void>> => async (dispatch) =>
   firebase
     .firestore()
     .collection('trips')
