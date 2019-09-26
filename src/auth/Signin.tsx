@@ -10,19 +10,20 @@ const Signin: React.FC = () => {
   return (
     <Formik
       initialValues={{ email: 'me4@ebulgakov.com', password: 'password' }}
-      onSubmit={async (values, { setSubmitting, setError }) => {
+      onSubmit={async (values, { setSubmitting, setStatus }) => {
+        setSubmitting(true)
         try {
           await dispatch(requestSignIn(values))
         } catch ({ message }) {
-          setError(message)
+          setStatus(message)
           setSubmitting(false)
         }
       }}
     >
-      {({ isSubmitting, error }) => (
+      {({ isSubmitting, status }) => (
         <Form>
           <h1>Login</h1>
-          {error && <div>{error}</div>}
+          {status && <div>{status}</div>}
           <Field type="email" name="email" />
           <Field type="password" name="password" />
           <button type="submit" disabled={isSubmitting}>

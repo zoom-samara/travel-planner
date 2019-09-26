@@ -17,7 +17,7 @@ const Auth: React.FC = ({ children }) => {
     init()
   }, [dispatch, user])
 
-  if (user) return <Redirect to="/service/dashboard" />
+  if (user) return <Redirect to="/service/trips" />
 
   return <>{children}</>
 }

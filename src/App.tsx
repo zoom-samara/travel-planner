@@ -1,7 +1,7 @@
 import React from 'react'
 import { hot } from 'react-hot-loader/root'
 import { Provider } from 'react-redux'
-import {Route, Switch} from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
 
 import store from './store'
@@ -12,7 +12,7 @@ import Signin from './auth/Signin'
 import Signup from './auth/Signup'
 import Header from './views/header/Header'
 import Meta from './auth/Meta'
-import Dashboard from './dashboard/Dashboard'
+import Trips from './trips/Trips'
 import Auth from './auth/Auth'
 import Private from './auth/Private'
 
@@ -41,7 +41,7 @@ const App: React.FC = () => {
               path="/service"
               render={() => (
                 <Private>
-                  <Route path="/service/dashboard" component={Dashboard} />
+                  <Route path="/service/trips" component={Trips} />
                 </Private>
               )}
             />

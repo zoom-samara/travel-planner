@@ -2,7 +2,7 @@ import { applyMiddleware, createStore } from 'redux'
 import thunk, { ThunkMiddleware } from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { routerMiddleware } from 'connected-react-router'
-import firebase from 'firebase'
+import * as firebase from 'firebase/app'
 
 import rootReducer from './rootReducer'
 import history from './history'

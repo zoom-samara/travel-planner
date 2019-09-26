@@ -7,7 +7,7 @@ const Landing: React.FC = () => (
     <br />
     <Link to="/auth/signin">Login page</Link>
     <Link to="/auth/signup">Registration page</Link>
-    <Link to="/service/dashboard">Dashboard</Link>
+    <Link to="/service/trips">Trips List</Link>
   </div>
 )
 

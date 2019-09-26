@@ -1,6 +1,7 @@
 import { createAction } from 'redux-actions'
 import { identity } from 'lodash/fp'
-import firebase from 'firebase'
+import * as firebase from 'firebase/app'
+import 'firebase/auth'
 
 import { Action, ThunkAction } from '../types/common'
 import { IUser, IAuthUser } from '../types/user'
@@ -49,7 +50,7 @@ export const requestSignIn = (user: IAuthUser): ThunkAction<Promise<void>> => as
     .then(({ user }) => {
       if (user) {
         dispatch(setUser(user as IUser))
-        history.push('/service/dashboard')
+        history.push('/service/trips')
       }
     })
     .catch((err) => Promise.reject(err))
@@ -66,7 +67,7 @@ export const requestSignUp = (newUser: IAuthUser): ThunkAction<Promise<void>> =>
           })
           .then(() => {
             dispatch(setUser(user as IUser))
-            history.push('/service/dashboard')
+            history.push('/service/trips')
           })
           .catch((err) => Promise.reject(err))
       }
