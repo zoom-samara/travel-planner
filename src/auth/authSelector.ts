@@ -3,4 +3,4 @@ import { Selector } from '../types/common'
 import { IUser } from '../types/user'
 
 export const userSelector: Selector<IUser> = get('auth.user')
-export const metaSelector: Selector<IUser> = get('auth.meta')
+export const authStatusSelector: Selector<IUser> = get('auth.updated')

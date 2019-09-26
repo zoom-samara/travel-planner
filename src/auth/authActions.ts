@@ -12,9 +12,9 @@ export const SET_USER = 'AUTH/SET_USER'
 export type SET_USER = Action<IUser>
 export const setUser = createAction<IUser, IUser>(SET_USER, identity)
 
-export const SET_META = 'AUTH/SET_META'
-export type SET_META = Action<boolean>
-export const setMeta = createAction<boolean, boolean>(SET_META, identity)
+export const SET_STATUS = 'AUTH/SET_STATUS'
+export type SET_STATUS = Action<boolean>
+export const setStatusUpdated = createAction<boolean, boolean>(SET_STATUS, identity)
 
 export const CLEAR_STATE = 'CLEAR_STATE'
 export type CLEAR_STATE = Action<null>
@@ -35,7 +35,7 @@ export const requestCurrentUser = (): ThunkAction<Promise<void>> => async (dispa
       )
     }
 
-    dispatch(setMeta(true))
+    dispatch(setStatusUpdated(true))
     unsubscribe()
   })
 }
@@ -46,6 +46,7 @@ export const requestLogout = (): ThunkAction<Promise<void>> => async (dispatch) 
     .signOut()
     .then(() => {
       dispatch(clearState())
+      dispatch(setStatusUpdated(true))
     })
 
 export const requestSignIn = (user: IAuthUser): ThunkAction<Promise<void>> => async (dispatch) =>
