@@ -16,14 +16,13 @@ const Trips: React.FC = () => {
 
   useEffect(() => {
     dispatch(getTripsList()).then(() => setLoading(false))
-  }, [])
+  }, [dispatch])
 
-  console.log(list, user.uid)
   return (
     <div>
       <ul>
         {list.map((trip: ITrip, idx) => (
-          <li key={trip.id + idx}>
+          <li key={trip.id}>
             <Link to={`/service/trip/${trip.id}`}>{trip.destination}</Link>
             {trip.uid === user.uid && <span> | your</span>}
           </li>

@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { userSelector } from './authSelector'
-import useThunkDispatch from '../common/useThunkDispatch'
-import { requestCurrentUser } from './authActions'
+import { metaSelector, userSelector } from './authSelector'
 import { Redirect } from 'react-router'
 
 const Private: React.FC = ({ children }) => {
+  const [loading, setLoading] = useState(true)
   const user = useSelector(userSelector)
-  const dispatch = useThunkDispatch()
+  const meta = useSelector(metaSelector)
+  const didMountRef = useRef(false)
 
   React.useEffect(() => {
-    const init = async () => {
-      if (!user) dispatch(requestCurrentUser())
+    if (didMountRef.current || user) {
+      setLoading(false)
+    } else {
+      didMountRef.current = true
     }
-    init()
-  }, [dispatch, user])
+  }, [user, meta])
+
+  if (loading) return <div>Loading Private</div>
 
   if (!user) return <Redirect to="/auth/signin" />
 

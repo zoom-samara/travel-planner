@@ -15,6 +15,7 @@ import Meta from './auth/Meta'
 import Trips from './trips/Trips'
 import Auth from './auth/Auth'
 import Private from './auth/Private'
+import Trip from './trip/Trip'
 
 const p404 = () => <h1>404 page not found</h1>
 
@@ -42,6 +43,7 @@ const App: React.FC = () => {
               render={() => (
                 <Private>
                   <Route path="/service/trips" component={Trips} />
+                  <Route path="/service/trip/:id" component={Trip} />
                 </Private>
               )}
             />

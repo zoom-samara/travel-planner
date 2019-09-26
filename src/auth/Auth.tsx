@@ -1,21 +1,23 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { userSelector } from './authSelector'
-import useThunkDispatch from '../common/useThunkDispatch'
-import { requestCurrentUser } from './authActions'
+import {metaSelector, userSelector} from './authSelector'
 import { Redirect } from 'react-router'
 
 const Auth: React.FC = ({ children }) => {
+  const [loading, setLoading] = useState(true)
   const user = useSelector(userSelector)
-  const dispatch = useThunkDispatch()
+  const meta = useSelector(metaSelector)
+  const didMountRef = useRef(false)
 
   React.useEffect(() => {
-    const init = async () => {
-      if (!user) dispatch(requestCurrentUser())
+    if (didMountRef.current || !user) {
+      setLoading(false)
+    } else {
+      didMountRef.current = true
     }
+  }, [user, meta])
 
-    init()
-  }, [dispatch, user])
+  if (loading) return <div>Loading Auth</div>
 
   if (user) return <Redirect to="/service/trips" />
 
