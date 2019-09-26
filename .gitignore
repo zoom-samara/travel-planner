@@ -24,3 +24,8 @@ yarn-error.log*
 
 # Idea files
 .idea
+
+# Firebase
+firebase-debug.log
+.firebase
+.firebaserc
