@@ -11,8 +11,11 @@
 @import "blocks/loading";
 @import "blocks/filter";
 @import "blocks/trips";
+@import "blocks/trips-item";
 @import "blocks/add-trip";
 @import "blocks/trip";
 @import "blocks/edit-trip";
 
 @import "pages/landing";
+
+@import "common/print";

@@ -11,8 +11,7 @@ import { userSelector } from '../auth/authSelector'
 import TripsFilter from './TripsFilter'
 import AddTrip from './AddTrip'
 import Loading from '../components/Loading/Loading'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarAlt, faUser } from '@fortawesome/free-solid-svg-icons'
+import TripsItem from './TripsItem'
 
 const Trips: React.FC = () => {
   const [showMyTrips, toggleMyTrips] = useState(true)
@@ -35,44 +34,14 @@ const Trips: React.FC = () => {
         defaultToggle={showMyTrips}
       />
       <div className="trips">
+        <h1 className="trips_print-title -next-month" />
         <ul className="trips_list">
           {list
             .filter((trip) => (showMyTrips ? trip.uid === user.uid : true))
             .filter((trip) => trip.destination.toLowerCase().includes(filter.toLowerCase()))
             .sort((a, b) => compareAsc(new Date(a.startDate), new Date(b.startDate)))
             .map((trip: ITrip) => (
-              <li
-                key={trip.id}
-                className={cn('trips_item', {
-                  '-prev': isBefore(new Date(trip.startDate), new Date()),
-                  '-next-month':
-                    isAfter(new Date(trip.startDate), new Date()) &&
-                    isBefore(new Date(trip.startDate), addMonths(new Date(), 1)),
-                })}
-              >
-                <div className="trips_title-row">
-                  {!showMyTrips && (
-                    <div className="trips_user-row">
-                      <FontAwesomeIcon className="trips_user-icon" icon={faUser} />
-                      {trip.uid === user.uid ? user.displayName : 'Anonymous'}
-                    </div>
-                  )}
-
-                  <div className="trips_date-row">
-                    <FontAwesomeIcon className="trips_date-icon" icon={faCalendarAlt} />
-                    <div className="trips_date">{trip.startDate}</div>
-                    {isAfter(new Date(trip.startDate), new Date()) && (
-                      <div className="trips_start">
-                        Days before start: <b>{differenceInDays(new Date(trip.startDate), new Date())}</b>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <Link className="trips_link" to={`/service/trip/${trip.id}`}>
-                  {trip.destination}
-                </Link>
-              </li>
+              <TripsItem trip={trip} user={user} showMyTrips={showMyTrips} />
             ))}
         </ul>
         {loading && <Loading />}

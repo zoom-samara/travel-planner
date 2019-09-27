@@ -1,0 +1,22 @@
+@media print {
+  .filter, .add-trip, .profile_logout, .trips-item:not(.-next-month) {
+    display: none;
+  }
+
+
+  .profile_user {
+    margin-right: 0;
+    border-right: 0;
+  }
+
+  .header_logo {
+    text-decoration: none !important;
+  }
+
+  .trips_print-title.-next-month {
+    display: block;
+    &::before {
+      content: 'Next month trips';
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.trips-item {
+  padding: 20px 0;
+  border-bottom: 1px solid $border-color;
+
+  &.-prev {
+    opacity: 0.5;
+  }
+}
+.trips-item_title-row {
+  display: flex;
+  align-items: center;
+}
+
+.trips-item_date-row {
+  display: flex;
+  align-items: baseline;
+}
+
+.trips-item_start {
+  font-size: 75%;
+  opacity: 0.6;
+  margin-left: 20px;
+}
+
+.trips-item_date-icon {
+  margin-right: 10px;
+  opacity: 0.6;
+  position: relative;
+  top: 1px;
+}
+
+
+.trips-item_user-row {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.trips-item_user-icon {
+  font-size: 13px;
+  margin-right: 10px;
+}

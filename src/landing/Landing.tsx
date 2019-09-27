@@ -15,7 +15,7 @@ const Landing: React.FC = () => (
       <div className="landing_photo-wrapper"><img className="landing_photo" src={require('./images/8.jpg')} alt=""/></div>
       <div className="landing_photo-wrapper"><img className="landing_photo" src={require('./images/9.jpg')} alt=""/></div>
     </div>
-    <Link to="/auth/signin" className="landing_btn">
+    <Link to="/auth/signup" className="landing_btn">
       Join to us
     </Link>
   </div>
