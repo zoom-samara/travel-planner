@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router'
-import Loading from "../components/Loading/Loading";
+import Loading from '../components/Loading/Loading'
 import { authStatusSelector, userSelector } from './authSelector'
 
 interface IProps {
@@ -9,18 +9,20 @@ interface IProps {
 }
 
 const Private: React.FC<IProps> = ({ children, isPrivate }) => {
-  const [loading, setLoading] = useState(true)
   const user = useSelector(userSelector)
   const meta = useSelector(authStatusSelector)
 
-  React.useEffect(() => {
-    if (meta) { setLoading(false) }
-  }, [meta])
+  if (!meta) {
+    return <Loading fullPage />
+  }
 
-  if (loading) { return <Loading fullPage/> }
+  if (!user && isPrivate) {
+    return <Redirect to="/auth/signin" />
+  }
 
-  if (!user && isPrivate) { return <Redirect to="/auth/signin" /> }
-  if (user && !isPrivate) { return <Redirect to="/service/trips" /> }
+  if (user && !isPrivate) {
+    return <Redirect to="/service/trips" />
+  }
 
   return <>{children}</>
 }

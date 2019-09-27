@@ -72,6 +72,8 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.9",
+    "@types/enzyme": "^3.10.3",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/history": "^4.7.3",
     "@types/jest": "^24.0.18",
     "@types/lodash": "^4.14.139",
@@ -85,6 +87,8 @@
     "@types/reselect": "^2.2.0",
     "@types/webpack-env": "^1.14.0",
     "@types/yup": "^0.26.24",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "stylelint": "^11.0.0",
     "stylelint-config-rational-order": "^0.1.2",
     "tslint": "^5.20.0",
