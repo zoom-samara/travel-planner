@@ -13,7 +13,6 @@ import Signup from './auth/Signup'
 import Header from './views/header/Header'
 import Meta from './auth/Meta'
 import Trips from './trips/Trips'
-import Auth from './auth/Auth'
 import Private from './auth/Private'
 import Trip from './trip/Trip'
 
@@ -30,18 +29,18 @@ const App: React.FC = () => {
             <Route
               path="/auth"
               render={() => (
-                <Auth>
+                <Private isPrivate={false}>
                   <Switch>
                     <Route path="/auth/signin" component={Signin} />
                     <Route path="/auth/signup" component={Signup} />
                   </Switch>
-                </Auth>
+                </Private>
               )}
             />
             <Route
               path="/service"
               render={() => (
-                <Private>
+                <Private isPrivate={true}>
                   <Route path="/service/trips" component={Trips} />
                   <Route path="/service/trip/:id" component={Trip} />
                 </Private>

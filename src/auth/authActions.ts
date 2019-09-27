@@ -2,6 +2,7 @@ import { createAction } from 'redux-actions'
 import { identity } from 'lodash/fp'
 import * as firebase from 'firebase/app'
 import 'firebase/auth'
+import { batch } from 'react-redux'
 
 import { Action, ThunkAction } from '../types/common'
 import { IUser, IAuthUser } from '../types/user'
@@ -45,8 +46,10 @@ export const requestLogout = (): ThunkAction<Promise<void>> => async (dispatch) 
     .auth()
     .signOut()
     .then(() => {
-      dispatch(clearState())
-      dispatch(setStatusUpdated(true))
+      batch(() => {
+        dispatch(clearState())
+        dispatch(setStatusUpdated(true))
+      })
     })
 
 export const requestSignIn = (user: IAuthUser): ThunkAction<Promise<void>> => async (dispatch) =>

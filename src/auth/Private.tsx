@@ -3,7 +3,11 @@ import { useSelector } from 'react-redux'
 import { authStatusSelector, userSelector } from './authSelector'
 import { Redirect } from 'react-router'
 
-const Private: React.FC = ({ children }) => {
+interface IProps {
+  isPrivate: boolean
+}
+
+const Private: React.FC<IProps> = ({ children, isPrivate }) => {
   const [loading, setLoading] = useState(true)
   const user = useSelector(userSelector)
   const meta = useSelector(authStatusSelector)
@@ -14,7 +18,8 @@ const Private: React.FC = ({ children }) => {
 
   if (loading) return <div>Loading Private</div>
 
-  if (!user) return <Redirect to="/auth/signin" />
+  if (!user && isPrivate) return <Redirect to="/auth/signin" />
+  if (user && !isPrivate) return <Redirect to="/service/trips" />
 
   return <>{children}</>
 }
