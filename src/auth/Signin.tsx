@@ -10,7 +10,7 @@ const Signin: React.FC = () => {
   return (
     <div className="container">
       <Formik
-        initialValues={{ email: 'me4@ebulgakov.com', password: 'password' }}
+        initialValues={{ email: '', password: '' }}
         onSubmit={async (values, { setSubmitting, setStatus }) => {
           setSubmitting(true)
           try {
