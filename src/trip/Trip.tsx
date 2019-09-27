@@ -6,6 +6,8 @@ import useThunkDispatch from '../common/useThunkDispatch'
 import { requestTripDetails } from './tripActions'
 import { tripSelector } from './tripSelector'
 import EditTrip from './EditTrip'
+import Loading from '../components/Loading/Loading'
+import { Link } from 'react-router-dom'
 
 interface IRouteParams {
   id: string
@@ -19,18 +21,38 @@ const Trip: React.FC<RouteComponentProps<IRouteParams>> = ({ match }) => {
   const dispatch = useThunkDispatch()
 
   useEffect(() => {
-    dispatch(requestTripDetails(id)).finally(() => setLoading(false))
+    dispatch(requestTripDetails(id)).then(() => setLoading(false))
   }, [dispatch, id])
 
-  if (loading) return <div>Loading</div>
+  if (loading) return <Loading fullPage />
 
   return (
-    <div>
-      <h1>{trip.destination}</h1>
+    <div className="container">
+      <div className="trip">
+        <div className="trip_title">
+          <Link to="/service/trips" className="trip_back">
+            &larr; Back to list
+          </Link>
+          <h1>{trip.destination}</h1>
+        </div>
+      </div>
+
       {trip.uid === user.uid && <EditTrip />}
-      {new Date(trip.startDate).toLocaleDateString()}
-      {new Date(trip.endDate).toLocaleDateString()}
-      {trip.comment}
+
+      <div className="trip_content">
+        <dl className="trip_field">
+          <dt>Start Date:</dt>
+          <dd>{new Date(trip.startDate).toLocaleDateString()}</dd>
+        </dl>
+        <dl className="trip_field">
+          <dt>End Date:</dt>
+          <dd>{new Date(trip.endDate).toLocaleDateString()}</dd>
+        </dl>
+        <dl className="trip_field">
+          <dt>Comment:</dt>
+          <dd>{trip.comment}</dd>
+        </dl>
+      </div>
     </div>
   )
 }

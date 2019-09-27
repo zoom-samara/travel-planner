@@ -3,9 +3,16 @@
 @import "common/scaffolding";
 @import "common/placeholders";
 
+@import "blocks/page";
 @import "blocks/header";
 @import "blocks/profile";
 @import "blocks/form";
 @import "blocks/auth";
+@import "blocks/loading";
+@import "blocks/filter";
+@import "blocks/trips";
+@import "blocks/add-trip";
+@import "blocks/trip";
+@import "blocks/edit-trip";
 
 @import "pages/landing";

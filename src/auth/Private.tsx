@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { authStatusSelector, userSelector } from './authSelector'
 import { Redirect } from 'react-router'
+import Loading from "../components/Loading/Loading";
 
 interface IProps {
   isPrivate: boolean
@@ -16,7 +17,7 @@ const Private: React.FC<IProps> = ({ children, isPrivate }) => {
     if (meta) setLoading(false)
   }, [meta])
 
-  if (loading) return <div>Loading Private</div>
+  if (loading) return <Loading fullPage/>
 
   if (!user && isPrivate) return <Redirect to="/auth/signin" />
   if (user && !isPrivate) return <Redirect to="/service/trips" />

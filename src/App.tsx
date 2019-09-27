@@ -22,33 +22,35 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <Header />
-        <Meta>
-          <Switch>
-            <Route path="/" exact component={Landing} />
-            <Route
-              path="/auth"
-              render={() => (
-                <Private isPrivate={false}>
-                  <Switch>
-                    <Route path="/auth/signin" component={Signin} />
-                    <Route path="/auth/signup" component={Signup} />
-                  </Switch>
-                </Private>
-              )}
-            />
-            <Route
-              path="/service"
-              render={() => (
-                <Private isPrivate={true}>
-                  <Route path="/service/trips" component={Trips} />
-                  <Route path="/service/trip/:id" component={Trip} />
-                </Private>
-              )}
-            />
-            <Route component={p404} />
-          </Switch>
-        </Meta>
+        <div className="page">
+          <Header />
+          <Meta>
+            <Switch>
+              <Route path="/" exact component={Landing} />
+              <Route
+                path="/auth"
+                render={() => (
+                  <Private isPrivate={false}>
+                    <Switch>
+                      <Route path="/auth/signin" component={Signin} />
+                      <Route path="/auth/signup" component={Signup} />
+                    </Switch>
+                  </Private>
+                )}
+              />
+              <Route
+                path="/service"
+                render={() => (
+                  <Private isPrivate={true}>
+                    <Route path="/service/trips" component={Trips} />
+                    <Route path="/service/trip/:id" component={Trip} />
+                  </Private>
+                )}
+              />
+              <Route component={p404} />
+            </Switch>
+          </Meta>
+        </div>
       </ConnectedRouter>
     </Provider>
   )

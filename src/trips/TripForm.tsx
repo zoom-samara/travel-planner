@@ -5,35 +5,61 @@ import { INewTrip } from '../types/trip'
 
 const TripForm: React.FC<FormikProps<INewTrip>> = ({ isSubmitting, isValid, isValidating, status, values }) => (
   <Form>
-    {status && <div>{status}</div>}
+    {status && <div className="form_error">{status}</div>}
 
-    <div>
-      <label htmlFor="destination">Destination</label>
-      <Field name="destination" required />
+    <div className="row">
+      <div className="col-sm-6">
+        <div className="form-group">
+          <label htmlFor="destination">
+            Destination <abbr title="Required">*</abbr>
+          </label>
+          <Field className="form-control" name="destination" required />
+        </div>
+        <div className="row">
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label htmlFor="startDate">
+                Start Date <abbr title="Required">*</abbr>
+              </label>
+              <Field
+                className="form-control"
+                type="date"
+                name="startDate"
+                min1={format(new Date(), 'yyyy-MM-dd')}
+                required
+              />
+            </div>
+          </div>
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label htmlFor="endDate">
+                End Date <abbr title="Required">*</abbr>
+              </label>
+              <Field
+                className="form-control"
+                type="date"
+                name="endDate"
+                min={values.startDate}
+                value={values.startDate > values.endDate && values.endDate ? values.startDate : values.endDate}
+                required
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="col-sm-6">
+        <div className="form-group">
+          <label htmlFor="comment">Comment</label>
+          <Field className="form-control" name="comment" component="textarea" rows={4} />
+        </div>
+      </div>
     </div>
-    <div>
-      <label htmlFor="startDate">Start Date</label>
-      <Field type="date" name="startDate" min1={format(new Date(), 'yyyy-MM-dd')} required />
+
+    <div className="form_controls">
+      <button className="form_submit" type="submit" disabled={isSubmitting}>
+        Submit Trip
+      </button>
     </div>
-    <div>
-      <label htmlFor="endDate">End Date</label>
-      <Field
-        type="date"
-        name="endDate"
-        min={values.startDate}
-        value={values.startDate > values.endDate && values.endDate ? values.startDate : values.endDate}
-        required
-      />
-    </div>
-    <div>
-      <label htmlFor="comment">Comment</label>
-      <Field name="comment" component="textarea" />
-    </div>
-    <div>{isValid}</div>
-    <div>{isValidating}</div>
-    <button type="submit" disabled={isSubmitting}>
-      Submit Trip
-    </button>
   </Form>
 )
 

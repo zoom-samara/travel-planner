@@ -9,19 +9,24 @@ const AddTrip: React.FC = () => {
   const dispatch = useThunkDispatch()
 
   return (
-    <Formik
-      initialValues={{ destination: '', startDate: '', endDate: '', comment: '' }}
-      onSubmit={(values, { setSubmitting, setStatus, resetForm }) => {
-        setSubmitting(true)
+    <section className="add-trip">
+      <h1 className="add-trip_title">Add new Trip</h1>
+      <div className="add-trip_form">
+        <Formik
+          initialValues={{ destination: '', startDate: '', endDate: '', comment: '' }}
+          onSubmit={(values, { setSubmitting, setStatus, resetForm }) => {
+            setSubmitting(true)
 
-        dispatch(requestCreateTrip(values))
-          .then(() => resetForm())
-          .catch(({ message }) => setStatus(message))
-          .finally(() => setSubmitting(false))
-      }}
-    >
-      {TripForm}
-    </Formik>
+            dispatch(requestCreateTrip(values))
+              .then(() => resetForm())
+              .catch(({ message }) => setStatus(message))
+              .finally(() => setSubmitting(false))
+          }}
+        >
+          {TripForm}
+        </Formik>
+      </div>
+    </section>
   )
 }
 

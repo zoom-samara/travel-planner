@@ -1,0 +1,24 @@
+.trip {
+
+}
+
+.trip_title {
+  display: flex;
+  align-items: baseline;
+}
+
+.trip_back {
+  margin-right: 10px;
+}
+
+.trip_content {
+  margin-top: 30px;
+}
+
+.trip_field {
+  display: flex;
+
+  dt {
+    min-width: 100px;
+  }
+}
