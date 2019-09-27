@@ -1,6 +1,6 @@
-import { Selector as ReselectSelector, ParametricSelector as ReselectParametricSelector } from 'reselect'
 import { Action as ReduxAction } from 'redux-actions'
 import { ThunkAction as ReduxThunkAction } from 'redux-thunk'
+import { Selector as ReselectSelector } from 'reselect'
 
 import store from '../store'
 

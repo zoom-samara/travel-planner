@@ -1,5 +1,5 @@
-import React from 'react'
 import { Formik } from 'formik'
+import React from 'react'
 import useThunkDispatch from '../common/useThunkDispatch'
 import { requestCreateTrip } from './tripsActions'
 

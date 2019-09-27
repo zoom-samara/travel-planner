@@ -11,12 +11,12 @@
 .profile_user {
   display: flex;
   align-items: center;
-  border-right: 1px solid $border-color;
-  padding-right: 20px;
   margin-right: 20px;
+  padding-right: 20px;
+  border-right: 1px solid $border-color;
 }
 
 .profile_user-icon {
-  opacity: .2;
   margin-right: 5px;
+  opacity: .2;
 }

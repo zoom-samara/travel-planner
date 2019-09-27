@@ -1,13 +1,13 @@
 import { handleActions } from 'redux-actions'
-import { SET_TRIP } from './tripActions'
 import { ITrip } from '../types/trip'
+import { SET_TRIP } from './tripActions'
 
 const DEFAULT_STATE: ITrip = {
-  id: '',
-  uid: '',
   destination: '',
   endDate: '',
-  startDate: ''
+  id: '',
+  startDate: '',
+  uid: '',
 }
 
 export default handleActions<typeof DEFAULT_STATE, any>(

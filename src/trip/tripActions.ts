@@ -1,11 +1,11 @@
-import { createAction } from 'redux-actions'
-import { identity } from 'lodash/fp'
 import * as firebase from 'firebase/app'
 import 'firebase/firestore'
+import { identity } from 'lodash/fp'
+import { createAction } from 'redux-actions'
 
+import history from '../history'
 import { Action, ThunkAction } from '../types/common'
 import { INewTrip, ITrip } from '../types/trip'
-import history from '../history'
 
 export const SET_TRIP = 'TRIP/SET'
 export type SET_TRIP = Action<ITrip>
@@ -22,7 +22,7 @@ export const requestTripDetails = (id: string): ThunkAction<Promise<void>> => as
         setTrip({
           id: doc.id,
           ...doc.data(),
-        } as ITrip)
+        } as any as ITrip)
       )
     })
     .catch((err) => Promise.reject(err))
@@ -42,7 +42,7 @@ export const requestRemoveTrip = (id: string): ThunkAction<Promise<void>> => asy
     .collection('trips')
     .doc(id)
     .delete()
-    .then(function() {
+    .then(() => {
       history.push('/service/trips')
     })
     .catch((err) => Promise.reject(err))

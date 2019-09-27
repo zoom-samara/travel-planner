@@ -1,8 +1,8 @@
-import { createAction } from 'redux-actions'
-import { identity } from 'lodash/fp'
 import * as firebase from 'firebase/app'
-import 'firebase/firestore'
 import 'firebase/auth'
+import 'firebase/firestore'
+import { identity } from 'lodash/fp'
+import { createAction } from 'redux-actions'
 
 import { Action, ThunkAction } from '../types/common'
 import { INewTrip, ITrip } from '../types/trip'

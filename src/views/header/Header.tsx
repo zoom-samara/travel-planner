@@ -1,11 +1,11 @@
+import { faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons'
-import { userSelector } from '../../auth/authSelector'
 import { Link } from 'react-router-dom'
-import useThunkDispatch from '../../common/useThunkDispatch'
 import { requestLogout } from '../../auth/authActions'
+import { userSelector } from '../../auth/authSelector'
+import useThunkDispatch from '../../common/useThunkDispatch'
 
 const Header: React.FC = () => {
   const user = useSelector(userSelector)

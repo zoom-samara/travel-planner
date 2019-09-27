@@ -1,15 +1,15 @@
+import { compareAsc } from 'date-fns'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { compareAsc } from 'date-fns'
-import { tripsSelector } from './tripsSelector'
-import useThunkDispatch from '../common/useThunkDispatch'
-import { getTripsList } from './tripsActions'
-import { ITrip } from '../types/trip'
 import { userSelector } from '../auth/authSelector'
-import TripsFilter from './TripsFilter'
-import AddTrip from './AddTrip'
+import useThunkDispatch from '../common/useThunkDispatch'
 import Loading from '../components/Loading/Loading'
+import { ITrip } from '../types/trip'
+import AddTrip from './AddTrip'
+import { getTripsList } from './tripsActions'
+import TripsFilter from './TripsFilter'
 import TripsItem from './TripsItem'
+import { tripsSelector } from './tripsSelector'
 
 const Trips: React.FC = () => {
   const [showMyTrips, toggleMyTrips] = useState(true)

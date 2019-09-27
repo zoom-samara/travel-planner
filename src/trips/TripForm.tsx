@@ -1,6 +1,6 @@
-import React from 'react'
-import { Field, Form, FormikProps } from 'formik'
 import { format } from 'date-fns'
+import { Field, Form, FormikProps } from 'formik'
+import React from 'react'
 import { INewTrip } from '../types/trip'
 
 const TripForm: React.FC<FormikProps<INewTrip>> = ({ isSubmitting, isValid, isValidating, status, values }) => (

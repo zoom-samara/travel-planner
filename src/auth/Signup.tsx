@@ -1,8 +1,8 @@
+import { Field, Form, Formik } from 'formik'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import useThunkDispatch from '../common/useThunkDispatch'
 import { requestSignUp } from './authActions'
-import { Field, Form, Formik } from 'formik'
-import { Link } from 'react-router-dom'
 
 const Signup: React.FC = () => {
   const dispatch = useThunkDispatch()

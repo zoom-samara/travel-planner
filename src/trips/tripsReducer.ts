@@ -1,7 +1,7 @@
-import { handleActions } from 'redux-actions'
 import { set } from 'lodash/fp'
-import { ADD_TRIP, SET_TRIPS } from './tripsActions'
+import { handleActions } from 'redux-actions'
 import { ITrip } from '../types/trip'
+import { ADD_TRIP, SET_TRIPS } from './tripsActions'
 
 const DEFAULT_STATE: { list: ITrip[] } = {
   list: [],

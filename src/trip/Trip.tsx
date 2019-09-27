@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { RouteComponentProps } from 'react-router'
 import { useSelector } from 'react-redux'
+import { RouteComponentProps } from 'react-router'
+import { Link } from 'react-router-dom'
 import { userSelector } from '../auth/authSelector'
 import useThunkDispatch from '../common/useThunkDispatch'
+import Loading from '../components/Loading/Loading'
+import EditTrip from './EditTrip'
 import { requestTripDetails } from './tripActions'
 import { tripSelector } from './tripSelector'
-import EditTrip from './EditTrip'
-import Loading from '../components/Loading/Loading'
-import { Link } from 'react-router-dom'
 
 interface IRouteParams {
   id: string
@@ -24,7 +24,7 @@ const Trip: React.FC<RouteComponentProps<IRouteParams>> = ({ match }) => {
     dispatch(requestTripDetails(id)).then(() => setLoading(false))
   }, [dispatch, id])
 
-  if (loading) return <Loading fullPage />
+  if (loading) { return <Loading fullPage /> }
 
   return (
     <div className="container">

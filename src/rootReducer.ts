@@ -1,18 +1,18 @@
-import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
+import { combineReducers } from 'redux'
 
-import authReducer from './auth/authReducer'
-import tripsReducer from './trips/tripsReducer'
-import tripReducer from './trip/tripReducer'
-import history from './history'
 import { CLEAR_STATE } from './auth/authActions'
+import authReducer from './auth/authReducer'
+import history from './history'
+import tripReducer from './trip/tripReducer'
+import tripsReducer from './trips/tripsReducer'
 import { Action } from './types/common'
 
 const reducer = combineReducers({
-  router: connectRouter(history),
   auth: authReducer,
-  trips: tripsReducer,
+  router: connectRouter(history),
   trip: tripReducer,
+  trips: tripsReducer,
 })
 
 export default (state: any, action: Action<any>) => reducer(action.type === CLEAR_STATE ? {} : state, action)

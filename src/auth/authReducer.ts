@@ -1,7 +1,7 @@
-import { handleActions } from 'redux-actions'
 import { set } from 'lodash/fp'
-import { SET_USER, SET_STATUS } from './authActions'
+import { handleActions } from 'redux-actions'
 import { IUser } from '../types/user'
+import { SET_STATUS, SET_USER } from './authActions'
 
 const DEFAULT_STATE: { user?: IUser, updated?: boolean } = {
   updated: false,

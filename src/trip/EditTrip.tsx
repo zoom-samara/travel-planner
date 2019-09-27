@@ -1,11 +1,11 @@
+import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { tripSelector } from './tripSelector'
-import { Formik } from 'formik'
-import { ITrip } from '../types/trip'
-import { requestRemoveTrip, requestUpdateTrip } from './tripActions'
 import useThunkDispatch from '../common/useThunkDispatch'
 import TripForm from '../trips/TripForm'
+import { ITrip } from '../types/trip'
+import { requestRemoveTrip, requestUpdateTrip } from './tripActions'
+import { tripSelector } from './tripSelector'
 
 const EditTrip: React.FC = () => {
   const [isEdit, onToggleEdit] = useState(false)
@@ -40,10 +40,10 @@ const EditTrip: React.FC = () => {
           <h2 className="edit-trip_title">Edit Trip</h2>
           <Formik
             initialValues={{
-              destination: trip.destination,
-              startDate: trip.startDate,
-              endDate: trip.endDate,
               comment: trip.comment,
+              destination: trip.destination,
+              endDate: trip.endDate,
+              startDate: trip.startDate,
             }}
             onSubmit={(values, { setSubmitting, setStatus }) => {
               setSubmitting(true)

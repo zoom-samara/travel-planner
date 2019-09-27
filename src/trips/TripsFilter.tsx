@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPrint } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useEffect, useState } from 'react'
 
 interface IProps {
-  onVisibleToggle(isVisible: boolean): void
-  onFilter(str: string): void
   defaultFilter: string
   defaultToggle: boolean
+  onVisibleToggle(isVisible: boolean): void
+  onFilter(str: string): void
 }
 
 const TripsFilter: React.FC<IProps> = ({ onFilter, onVisibleToggle, defaultFilter, defaultToggle }) => {

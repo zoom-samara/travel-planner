@@ -1,21 +1,21 @@
 .trips {
-  min-height: 100px;
   position: relative;
+  min-height: 100px;
 }
 
 .trips_print-title {
   display: none;
   margin-bottom: $headings-margin-bottom;
-  font-family: $headings-font-family;
-  font-size: $h1-font-size;
-  line-height: $headings-line-height;
   font-weight: $headings-font-weight;
+  font-size: $h1-font-size;
+  font-family: $headings-font-family;
+  line-height: $headings-line-height;
 }
 
 .trips_list {
-  list-style: none;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .trips_empty {

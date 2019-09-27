@@ -17,16 +17,16 @@
 }
 
 .trips-item_start {
+  margin-left: 20px;
   font-size: 75%;
   opacity: 0.6;
-  margin-left: 20px;
 }
 
 .trips-item_date-icon {
-  margin-right: 10px;
-  opacity: 0.6;
   position: relative;
   top: 1px;
+  margin-right: 10px;
+  opacity: 0.6;
 }
 
 
@@ -37,6 +37,6 @@
 }
 
 .trips-item_user-icon {
-  font-size: 13px;
   margin-right: 10px;
+  font-size: 13px;
 }

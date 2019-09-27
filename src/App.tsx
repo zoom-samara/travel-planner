@@ -1,20 +1,20 @@
+import { ConnectedRouter } from 'connected-react-router'
 import React from 'react'
 import { hot } from 'react-hot-loader/root'
 import { Provider } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
-import { ConnectedRouter } from 'connected-react-router'
 
-import store from './store'
 import history from './history'
+import store from './store'
 
-import Landing from './landing/Landing'
+import Meta from './auth/Meta'
+import Private from './auth/Private'
 import Signin from './auth/Signin'
 import Signup from './auth/Signup'
-import Header from './views/header/Header'
-import Meta from './auth/Meta'
-import Trips from './trips/Trips'
-import Private from './auth/Private'
+import Landing from './landing/Landing'
 import Trip from './trip/Trip'
+import Trips from './trips/Trips'
+import Header from './views/header/Header'
 
 const p404 = () => <h1>404 page not found</h1>
 

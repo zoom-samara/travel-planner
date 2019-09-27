@@ -4,9 +4,9 @@
 
 .edit-trip_control {
   @extend %clear-button;
-  border-bottom: 1px dashed ;
   margin-right: 20px;
   line-height: 1.2;
+  border-bottom: 1px dashed ;
 
   &:hover {
     opacity: .7;
@@ -24,8 +24,8 @@
 
 .edit-trip_form {
   margin-top: 20px;
-  border: 1px solid $border-color;
   padding: 20px;
+  border: 1px solid $border-color;
   border-radius: 10px;
 }
 

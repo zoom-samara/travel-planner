@@ -1,11 +1,11 @@
-import { createAction } from 'redux-actions'
-import { identity } from 'lodash/fp'
 import * as firebase from 'firebase/app'
 import 'firebase/auth'
+import { identity } from 'lodash/fp'
 import { batch } from 'react-redux'
+import { createAction } from 'redux-actions'
 
 import { Action, ThunkAction } from '../types/common'
-import { IUser, IAuthUser } from '../types/user'
+import { IAuthUser, IUser } from '../types/user'
 
 import history from '../history'
 
@@ -29,10 +29,10 @@ export const requestCurrentUser = (): ThunkAction<Promise<void>> => async (dispa
     if (user) {
       dispatch(
         setUser({
-          uid: user.uid,
-          email: user.email,
           displayName: user.displayName,
-        } as IUser)
+          email: user.email,
+          uid: user.uid,
+        } as any as IUser)
       )
     }
 
@@ -52,13 +52,13 @@ export const requestLogout = (): ThunkAction<Promise<void>> => async (dispatch) 
       })
     })
 
-export const requestSignIn = (user: IAuthUser): ThunkAction<Promise<void>> => async (dispatch) =>
+export const requestSignIn = (userData: IAuthUser): ThunkAction<Promise<void>> => async (dispatch) =>
   firebase
     .auth()
-    .signInWithEmailAndPassword(user.email, user.password)
+    .signInWithEmailAndPassword(userData.email, userData.password)
     .then(({ user }) => {
       if (user) {
-        dispatch(setUser(user as IUser))
+        dispatch(setUser(user as any as IUser))
         history.push('/service/trips')
       }
     })
