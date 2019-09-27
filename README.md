@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Current staging is available on Firebase: https://travel-planner-49309.firebaseapp.com
 
 ## Available Scripts
 
