@@ -1,0 +1,18 @@
+.form_submit {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+.form_error {
+  @extend .alert;
+  @extend .alert-danger;
+}
+
+.form_controls {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid $border-color;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignOutAlt, faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons'
 import { userSelector } from '../../auth/authSelector'
 import { Link } from 'react-router-dom'
 import useThunkDispatch from '../../common/useThunkDispatch'
