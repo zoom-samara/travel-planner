@@ -11,9 +11,9 @@ const EditTrip: React.FC = () => {
   const [isEdit, onToggleEdit] = useState(false)
   const trip: ITrip = useSelector(tripSelector)
   const dispatch = useThunkDispatch()
-  const onRemove = () => {
+  const onRemove = async () => {
     try {
-      dispatch(requestRemoveTrip(trip.id))
+      await dispatch(requestRemoveTrip(trip.id))
     } catch (err) {
       window.alert(err)
     }
