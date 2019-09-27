@@ -15,15 +15,14 @@ const store = createStore(
   composeEnhancers(applyMiddleware(routerMiddleware(history), thunk as ThunkMiddleware))
 )
 
-firebase.initializeApp({
-  apiKey: 'AIzaSyDKXE2SuNfvQBcKSiwdMWoW98PnsxGGmwU',
-  authDomain: 'travel-planner-49309.firebaseapp.com',
-  databaseURL: 'https://travel-planner-49309.firebaseio.com',
-  projectId: 'travel-planner-49309',
-  storageBucket: 'travel-planner-49309.appspot.com',
-  messagingSenderId: '440891735435',
-  appId: '1:440891735435:web:b1c114f0104f1f3642c38e',
-})
+let firebaseCredentials = {}
+try {
+  firebaseCredentials = require('./firebase_credentials.json')
+} catch (ex) {
+  console.error('INCLUDE firebase_credentials.json in "src" directory')
+}
+
+firebase.initializeApp(firebaseCredentials)
 
 if (module.hot) {
   module.hot.accept('./rootReducer', () => {
