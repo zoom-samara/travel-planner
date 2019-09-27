@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import cn from 'classnames'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { compareAsc, isAfter, differenceInDays, addMonths, isBefore } from 'date-fns'
+import { compareAsc } from 'date-fns'
 import { tripsSelector } from './tripsSelector'
 import useThunkDispatch from '../common/useThunkDispatch'
 import { getTripsList } from './tripsActions'
@@ -17,9 +15,13 @@ const Trips: React.FC = () => {
   const [showMyTrips, toggleMyTrips] = useState(true)
   const [filter, setFilter] = useState('')
   const [loading, setLoading] = useState(true)
+
   const dispatch = useThunkDispatch()
-  const list = useSelector(tripsSelector)
   const user = useSelector(userSelector)
+  const list = useSelector(tripsSelector)
+    .filter((trip) => (showMyTrips ? trip.uid === user.uid : true))
+    .filter((trip) => trip.destination.toLowerCase().includes(filter.toLowerCase()))
+    .sort((a, b) => compareAsc(new Date(a.startDate), new Date(b.startDate)))
 
   useEffect(() => {
     dispatch(getTripsList()).then(() => setLoading(false))
@@ -34,16 +36,20 @@ const Trips: React.FC = () => {
         defaultToggle={showMyTrips}
       />
       <div className="trips">
-        <h1 className="trips_print-title -next-month" />
-        <ul className="trips_list">
-          {list
-            .filter((trip) => (showMyTrips ? trip.uid === user.uid : true))
-            .filter((trip) => trip.destination.toLowerCase().includes(filter.toLowerCase()))
-            .sort((a, b) => compareAsc(new Date(a.startDate), new Date(b.startDate)))
-            .map((trip: ITrip) => (
-              <TripsItem trip={trip} user={user} showMyTrips={showMyTrips} />
+        <div className="trips_print-title -next-month" />
+        {list.length > 0 ? (
+          <ul className="trips_list">
+            {list.map((trip: ITrip) => (
+              <TripsItem key={trip.id} trip={trip} user={user} showMyTrips={showMyTrips} />
             ))}
-        </ul>
+          </ul>
+        ) : (
+          !loading && (
+            <div className="trips_empty alert alert-info">
+              You do not have trips. You can add your first trip below.
+            </div>
+          )
+        )}
         {loading && <Loading />}
       </div>
 
