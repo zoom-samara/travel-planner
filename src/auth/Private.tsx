@@ -4,11 +4,11 @@ import { Redirect } from 'react-router'
 import Loading from '../components/Loading/Loading'
 import { authStatusSelector, userSelector } from './authSelector'
 
-interface IProps {
+interface IPrivateProps {
   isPrivate: boolean
 }
 
-const Private: React.FC<IProps> = ({ children, isPrivate }) => {
+const Private: React.FC<IPrivateProps> = ({ children, isPrivate }) => {
   const user = useSelector(userSelector)
   const meta = useSelector(authStatusSelector)
 

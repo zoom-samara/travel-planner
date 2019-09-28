@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import { userSelector } from '../auth/authSelector'
 import useThunkDispatch from '../common/useThunkDispatch'
 import Loading from '../components/Loading/Loading'
-import { ITrip } from '../types/trip'
+import { IFilter, ITrip } from '../types/trip'
+import { IUser } from '../types/user'
 import AddTrip from './AddTrip'
 import { getTripsList } from './tripsActions'
 import TripsFilter from './TripsFilter'
 import TripsItem from './TripsItem'
 import { filteredTripsSelector, filterTripsSelector } from './tripsSelector'
 
-const Trips: React.FC = () => {
-  const [loading, setLoading] = useState(true)
+interface ITripsProps {
+  filter: IFilter
+  list: ITrip[]
+  user: IUser
+}
 
+const Trips: React.FC<ITripsProps> = ({ user, list, filter }) => {
+  const [loading, setLoading] = useState(true)
   const dispatch = useThunkDispatch()
-  const user = useSelector(userSelector)
-  const list = useSelector(filteredTripsSelector)
-  const filter = useSelector(filterTripsSelector)
 
   useEffect(() => {
     dispatch(getTripsList()).then(() => setLoading(false))
@@ -48,4 +52,10 @@ const Trips: React.FC = () => {
   )
 }
 
-export default Trips
+export default connect(
+  createStructuredSelector({
+    user: userSelector,
+    list: filteredTripsSelector,
+    filter: filterTripsSelector,
+  })
+)(Trips)

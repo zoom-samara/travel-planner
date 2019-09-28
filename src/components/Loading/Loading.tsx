@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import cn from 'classnames'
 import React from 'react'
 
-interface IProps {
+interface ILoadingProps {
   fullPage?: boolean
 }
 
-const Loading: React.FC<IProps> = ({ fullPage }) => (
+const Loading: React.FC<ILoadingProps> = ({ fullPage }) => (
   <div
     className={cn('loading', {
       '-full-page': fullPage,

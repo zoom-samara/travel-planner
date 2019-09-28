@@ -6,7 +6,7 @@ import store from '../store'
 
 export type Store = typeof store
 
-export type Selector<Result> = ReselectSelector<Store, Result>
+export type Selector<Result> = ReselectSelector<Store | any, Result>
 
 export type Action<Payload> = ReduxAction<Payload>
 

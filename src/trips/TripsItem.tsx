@@ -7,13 +7,13 @@ import { Link } from 'react-router-dom'
 import { ITrip } from '../types/trip'
 import { IUser } from '../types/user'
 
-interface IProps {
+interface ITripsItemProps {
   trip: ITrip
   user: IUser
   showMyTrips?: boolean
 }
 
-const TripsItem: React.FC<IProps> = ({ trip, user, showMyTrips }) => (
+const TripsItem: React.FC<ITripsItemProps> = ({ trip, user, showMyTrips }) => (
   <li
     className={cn('trips-item', {
       '-next-month':
