@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import {ReduxDispatch} from "../types/common";
 import { IFilter } from '../types/trip'
 import { setFilter } from './tripsActions'
 import { filterTripsSelector } from './tripsSelector'
@@ -12,7 +13,7 @@ interface ITripsFilterProps {
 }
 
 const TripsFilter: React.FC<ITripsFilterProps> = ({ filter }) => {
-  const dispatch = useDispatch()
+  const dispatch: ReduxDispatch = useDispatch()
 
   const toggleVisibility = (value: boolean) => {
     dispatch(setFilter({ ...filter, onlyMyTrips: value }))

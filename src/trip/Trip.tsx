@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { userSelector } from '../auth/authSelector'
 import Loading from '../components/Loading/Loading'
+import {ReduxDispatch} from "../types/common";
 import { ITrip } from '../types/trip'
 import { IUser } from '../types/user'
 import EditTrip from './EditTrip'
@@ -23,10 +24,10 @@ interface ITripProps {
 const Trip: React.FC<RouteComponentProps<IRouteParams> & ITripProps> = ({ match, user, trip }) => {
   const id = String(match.params.id)
   const [loading, setLoading] = useState(true)
-  const dispatch = useDispatch()
+  const dispatch: ReduxDispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(requestTripDetails(id) as any).then(() => setLoading(false))
+    dispatch(requestTripDetails(id)).then(() => setLoading(false))
   }, [dispatch, id])
 
   if (loading) {

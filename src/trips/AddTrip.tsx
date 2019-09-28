@@ -3,10 +3,11 @@ import React from 'react'
 import { requestCreateTrip } from './tripsActions'
 
 import { useDispatch } from 'react-redux'
+import { ReduxDispatch } from '../types/common'
 import TripForm from './TripForm'
 
 const AddTrip: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch: ReduxDispatch = useDispatch()
 
   return (
     <section className="add-trip">
@@ -17,7 +18,7 @@ const AddTrip: React.FC = () => {
           onSubmit={(values, { setSubmitting, setStatus, resetForm }) => {
             setSubmitting(true)
 
-            dispatch(requestCreateTrip(values) as any)
+            dispatch(requestCreateTrip(values))
               .then(() => resetForm())
               .catch(({ message }: { message: string }) => setStatus(message))
               .finally(() => setSubmitting(false))

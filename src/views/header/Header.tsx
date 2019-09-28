@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { requestLogout } from '../../auth/authActions'
 import { userSelector } from '../../auth/authSelector'
+import {ReduxDispatch} from "../../types/common";
 import { IUser } from '../../types/user'
 
 interface IHeaderProps {
@@ -13,7 +14,7 @@ interface IHeaderProps {
 }
 
 const Header: React.FC<IHeaderProps> = ({ user }) => {
-  const dispatch = useDispatch()
+  const dispatch: ReduxDispatch = useDispatch()
   return (
     <div className="container">
       <header className="header">

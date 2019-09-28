@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import TripForm from '../trips/TripForm'
+import {ReduxDispatch} from "../types/common";
 import { ITrip } from '../types/trip'
 import { requestRemoveTrip, requestUpdateTrip } from './tripActions'
 import { tripSelector } from './tripSelector'
@@ -12,7 +13,7 @@ interface IEditTripProps {
 }
 const EditTrip: React.FC<IEditTripProps> = ({ trip }) => {
   const [isEdit, onToggleEdit] = useState(false)
-  const dispatch = useDispatch()
+  const dispatch: ReduxDispatch = useDispatch()
   const onRemove = async () => {
     try {
       await dispatch(requestRemoveTrip(trip.id))
@@ -49,7 +50,7 @@ const EditTrip: React.FC<IEditTripProps> = ({ trip }) => {
             }}
             onSubmit={(values, { setSubmitting, setStatus }) => {
               setSubmitting(true)
-              dispatch(requestUpdateTrip(trip.id, values) as any)
+              dispatch(requestUpdateTrip(trip.id, values))
                 .then(() => {
                   onToggleEdit(false)
                 })
