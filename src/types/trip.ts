@@ -9,3 +9,8 @@ export interface ITrip extends INewTrip {
   id: string
   uid: string
 }
+
+export interface IFilter {
+  search: string
+  onlyMyTrips: boolean
+}

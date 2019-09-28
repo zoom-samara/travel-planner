@@ -5,11 +5,15 @@ import { identity } from 'lodash/fp'
 import { createAction } from 'redux-actions'
 
 import { Action, ThunkAction } from '../types/common'
-import { INewTrip, ITrip } from '../types/trip'
+import { INewTrip, ITrip, IFilter } from '../types/trip'
 
 export const ADD_TRIP = 'TRIPS/ADD_TRIP'
 export type ADD_TRIP = Action<ITrip>
 export const addTrip = createAction<ITrip, ITrip>(ADD_TRIP, identity)
+
+export const SET_FILTER = 'TRIPS/SET_FILTER'
+export type SET_FILTER = Action<IFilter>
+export const setFilter = createAction<IFilter, IFilter>(SET_FILTER, identity)
 
 export const SET_TRIPS = 'TRIPS/SET_TRIPS'
 export type SET_TRIPS = Action<ITrip[]>

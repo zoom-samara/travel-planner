@@ -1,4 +1,3 @@
-import { compareAsc } from 'date-fns'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { userSelector } from '../auth/authSelector'
@@ -9,19 +8,15 @@ import AddTrip from './AddTrip'
 import { getTripsList } from './tripsActions'
 import TripsFilter from './TripsFilter'
 import TripsItem from './TripsItem'
-import { tripsSelector } from './tripsSelector'
+import { filteredTripsSelector, filterTripsSelector } from './tripsSelector'
 
 const Trips: React.FC = () => {
-  const [showMyTrips, toggleMyTrips] = useState(true)
-  const [filter, setFilter] = useState('')
   const [loading, setLoading] = useState(true)
 
   const dispatch = useThunkDispatch()
   const user = useSelector(userSelector)
-  const list = useSelector(tripsSelector)
-    .filter((trip) => (showMyTrips ? trip.uid === user.uid : true))
-    .filter((trip) => trip.destination.toLowerCase().includes(filter.toLowerCase()))
-    .sort((a, b) => compareAsc(new Date(a.startDate), new Date(b.startDate)))
+  const list = useSelector(filteredTripsSelector)
+  const showMyTrips = useSelector(filterTripsSelector).onlyMyTrips
 
   useEffect(() => {
     dispatch(getTripsList()).then(() => setLoading(false))
@@ -29,12 +24,7 @@ const Trips: React.FC = () => {
 
   return (
     <div className="container">
-      <TripsFilter
-        onVisibleToggle={toggleMyTrips}
-        onFilter={setFilter}
-        defaultFilter={filter}
-        defaultToggle={showMyTrips}
-      />
+      <TripsFilter />
       <div className="trips">
         <div className="trips_print-title -next-month" />
         {list.length > 0 ? (

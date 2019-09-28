@@ -1,25 +1,21 @@
 import { faPrint } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { filterTripsSelector } from './tripsSelector'
+import useThunkDispatch from '../common/useThunkDispatch'
+import { setFilter } from './tripsActions'
 
-interface IProps {
-  defaultFilter: string
-  defaultToggle: boolean
-  onVisibleToggle(isVisible: boolean): void
-  onFilter(str: string): void
-}
+const TripsFilter: React.FC = () => {
+  const filter = useSelector(filterTripsSelector)
+  const dispatch = useThunkDispatch()
 
-const TripsFilter: React.FC<IProps> = ({ onFilter, onVisibleToggle, defaultFilter, defaultToggle }) => {
-  const [visibility, toggleVisibility] = useState(defaultToggle)
-  const [filter, toggleFilter] = useState(defaultFilter)
-
-  useEffect(() => {
-    onVisibleToggle(visibility)
-  }, [visibility, onVisibleToggle])
-
-  useEffect(() => {
-    onFilter(filter)
-  }, [filter, onFilter])
+  const toggleVisibility = (value: boolean) => {
+    dispatch(setFilter({ ...filter, onlyMyTrips: value }))
+  }
+  const onChangeSearch = (value: string) => {
+    dispatch(setFilter({ ...filter, search: value }))
+  }
 
   return (
     <section className="filter">
@@ -29,7 +25,8 @@ const TripsFilter: React.FC<IProps> = ({ onFilter, onVisibleToggle, defaultFilte
           <input
             className="form-control"
             type="text"
-            onChange={(e) => toggleFilter(e.target.value)}
+            defaultValue={filter.search}
+            onChange={(e) => onChangeSearch(e.target.value)}
             placeholder="Find by Destination"
           />
         </div>
@@ -44,8 +41,8 @@ const TripsFilter: React.FC<IProps> = ({ onFilter, onVisibleToggle, defaultFilte
             id="toggleVisibility"
             type="checkbox"
             className="filter_visibility-input"
-            checked={visibility}
-            onChange={() => toggleVisibility(!visibility)}
+            checked={filter.onlyMyTrips}
+            onChange={() => toggleVisibility(!filter.onlyMyTrips)}
           />
         </div>
 
