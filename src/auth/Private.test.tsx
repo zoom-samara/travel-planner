@@ -14,7 +14,9 @@ describe('Private Component', () => {
   it('By Default Should be Loading', () => {
     const wrapper = Enzyme.shallow(
       <Provider store={store}>
-        <Private isPrivate={true} />
+        <BrowserRouter>
+          <Private isPrivate={true} />
+        </BrowserRouter>
       </Provider>
     )
 
@@ -24,9 +26,11 @@ describe('Private Component', () => {
   it('If user not auth', () => {
     const wrapper = Enzyme.shallow(
       <Provider store={store}>
-        <Private isPrivate={false}>
-          <div>test</div>
-        </Private>
+        <BrowserRouter>
+          <Private isPrivate={false}>
+            <div>test</div>
+          </Private>
+        </BrowserRouter>
       </Provider>
     )
 
@@ -35,12 +39,30 @@ describe('Private Component', () => {
     expect(wrapper.render()).toMatchObject(Enzyme.shallow(<div>test</div>).render())
   })
 
+  it('If user not auth in Private zone', () => {
+    const wrapper = Enzyme.shallow(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Private isPrivate={true}>
+            <div>test</div>
+          </Private>
+        </BrowserRouter>
+      </Provider>
+    )
+
+    store.dispatch(setStatusUpdated(true))
+
+    expect(wrapper.render()).not.toMatchObject(Enzyme.shallow(<div>test</div>).render())
+  })
+
   it('If user auth', () => {
     const wrapper = Enzyme.shallow(
       <Provider store={store}>
-        <Private isPrivate={true}>
-          <div>test</div>
-        </Private>
+        <BrowserRouter>
+          <Private isPrivate={true}>
+            <div>test</div>
+          </Private>
+        </BrowserRouter>
       </Provider>
     )
 
@@ -48,5 +70,22 @@ describe('Private Component', () => {
     store.dispatch(setUser({ displayName: 'displayName', email: 'email', uid: '123' }))
 
     expect(wrapper.render()).toMatchObject(Enzyme.shallow(<div>test</div>).render())
+  })
+
+  it('If user auth in Sign zone', () => {
+    const wrapper = Enzyme.shallow(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Private isPrivate={false}>
+            <div>test</div>
+          </Private>
+        </BrowserRouter>
+      </Provider>
+    )
+
+    store.dispatch(setStatusUpdated(true))
+    store.dispatch(setUser({ displayName: 'displayName', email: 'email', uid: '123' }))
+
+    expect(wrapper.render()).not.toMatchObject(Enzyme.shallow(<div>test</div>).render())
   })
 })
