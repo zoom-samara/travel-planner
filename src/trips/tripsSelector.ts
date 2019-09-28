@@ -3,10 +3,10 @@ import { get } from 'lodash/fp'
 import { createSelector } from 'reselect'
 import { userSelector } from '../auth/authSelector'
 import { Selector } from '../types/common'
-import { IFilter, ITrip } from '../types/trip'
+import { ITrip, ITripsFilter } from '../types/trip'
 
 export const tripsSelector: Selector<ITrip[]> = get('trips.list')
-export const filterTripsSelector: Selector<IFilter> = get('trips.filter')
+export const filterTripsSelector: Selector<ITripsFilter> = get('trips.filter')
 
 export const filteredTripsSelector: Selector<ITrip[]> = createSelector(
   tripsSelector,

@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect'
 import { userSelector } from '../auth/authSelector'
 import Loading from '../components/Loading/Loading'
 import {ReduxDispatch} from "../types/common";
-import { IFilter, ITrip } from '../types/trip'
+import { ITrip, ITripsFilter } from '../types/trip'
 import { IUser } from '../types/user'
 import AddTrip from './AddTrip'
 import { getTripsList } from './tripsActions'
@@ -13,7 +13,7 @@ import TripsItem from './TripsItem'
 import { filteredTripsSelector, filterTripsSelector } from './tripsSelector'
 
 interface ITripsProps {
-  filter: IFilter
+  filter: ITripsFilter
   list: ITrip[]
   user: IUser
 }

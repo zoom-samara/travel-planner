@@ -1,9 +1,9 @@
 import { set } from 'lodash/fp'
 import { handleActions } from 'redux-actions'
-import { IFilter, ITrip } from '../types/trip'
+import { ITrip, ITripsFilter } from '../types/trip'
 import { ADD_TRIP, SET_FILTER, SET_TRIPS } from './tripsActions'
 
-const DEFAULT_STATE: { list: ITrip[]; filter: IFilter } = {
+const DEFAULT_STATE: { list: ITrip[]; filter: ITripsFilter } = {
   filter: {
     onlyMyTrips: true,
     search: '',

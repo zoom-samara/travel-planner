@@ -10,7 +10,7 @@ export interface ITrip extends INewTrip {
   uid: string
 }
 
-export interface IFilter {
+export interface ITripsFilter {
   search: string
   onlyMyTrips: boolean
 }

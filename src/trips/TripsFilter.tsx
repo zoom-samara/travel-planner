@@ -4,12 +4,12 @@ import React from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import {ReduxDispatch} from "../types/common";
-import { IFilter } from '../types/trip'
+import { ITripsFilter } from '../types/trip'
 import { setFilter } from './tripsActions'
 import { filterTripsSelector } from './tripsSelector'
 
 interface ITripsFilterProps {
-  filter: IFilter
+  filter: ITripsFilter
 }
 
 const TripsFilter: React.FC<ITripsFilterProps> = ({ filter }) => {
