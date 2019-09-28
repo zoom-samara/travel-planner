@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16'
 import { Provider } from 'react-redux'
 import store from '../store'
 import { setStatusUpdated, setUser } from './authActions'
-import { BrowserRouter, Redirect } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 Enzyme.configure({ adapter: new Adapter() })
 

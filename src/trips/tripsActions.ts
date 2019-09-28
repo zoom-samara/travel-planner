@@ -9,7 +9,7 @@ import { INewTrip, ITrip } from '../types/trip'
 
 export const ADD_TRIP = 'TRIPS/ADD_TRIP'
 export type ADD_TRIP = Action<ITrip>
-export const setTrip = createAction<ITrip, ITrip>(ADD_TRIP, identity)
+export const addTrip = createAction<ITrip, ITrip>(ADD_TRIP, identity)
 
 export const SET_TRIPS = 'TRIPS/SET_TRIPS'
 export type SET_TRIPS = Action<ITrip[]>
@@ -32,7 +32,7 @@ export const requestCreateTrip = (trip: INewTrip): ThunkAction<Promise<void>> =>
         .get()
         .then((doc) => {
           dispatch(
-            setTrip({
+            addTrip({
               id: doc.id,
               ...doc.data(),
             } as ITrip)
