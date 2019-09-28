@@ -1,11 +1,11 @@
 import { Field, Form, Formik } from 'formik'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import useThunkDispatch from '../common/useThunkDispatch'
 import { requestSignUp } from './authActions'
 
 const Signup: React.FC = () => {
-  const dispatch = useThunkDispatch()
+  const dispatch = useDispatch()
 
   return (
     <Formik

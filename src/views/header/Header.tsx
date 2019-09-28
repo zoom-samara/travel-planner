@@ -1,12 +1,11 @@
 import { faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { requestLogout } from '../../auth/authActions'
 import { userSelector } from '../../auth/authSelector'
-import useThunkDispatch from '../../common/useThunkDispatch'
 import { IUser } from '../../types/user'
 
 interface IHeaderProps {
@@ -14,7 +13,7 @@ interface IHeaderProps {
 }
 
 const Header: React.FC<IHeaderProps> = ({ user }) => {
-  const dispatch = useThunkDispatch()
+  const dispatch = useDispatch()
   return (
     <div className="container">
       <header className="header">

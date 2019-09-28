@@ -1,8 +1,7 @@
 import { Formik } from 'formik'
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import useThunkDispatch from '../common/useThunkDispatch'
 import TripForm from '../trips/TripForm'
 import { ITrip } from '../types/trip'
 import { requestRemoveTrip, requestUpdateTrip } from './tripActions'
@@ -13,7 +12,7 @@ interface IEditTripProps {
 }
 const EditTrip: React.FC<IEditTripProps> = ({ trip }) => {
   const [isEdit, onToggleEdit] = useState(false)
-  const dispatch = useThunkDispatch()
+  const dispatch = useDispatch()
   const onRemove = async () => {
     try {
       await dispatch(requestRemoveTrip(trip.id))
@@ -50,11 +49,11 @@ const EditTrip: React.FC<IEditTripProps> = ({ trip }) => {
             }}
             onSubmit={(values, { setSubmitting, setStatus }) => {
               setSubmitting(true)
-              dispatch(requestUpdateTrip(trip.id, values))
+              dispatch(requestUpdateTrip(trip.id, values) as any)
                 .then(() => {
                   onToggleEdit(false)
                 })
-                .catch(({ message }) => setStatus(message))
+                .catch(({ message }: { message: string }) => setStatus(message))
                 .finally(() => setSubmitting(false))
             }}
           >

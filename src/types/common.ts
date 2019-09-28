@@ -10,4 +10,4 @@ export type Selector<Result> = ReselectSelector<Store | any, Result>
 
 export type Action<Payload> = ReduxAction<Payload>
 
-export type ThunkAction<Return = void> = ReduxThunkAction<Return, Store | any, undefined, Action<any>>
+export type ThunkAction<Return = void> = ReduxThunkAction<Return, Store, undefined, Action<any>>

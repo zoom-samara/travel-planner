@@ -1,12 +1,12 @@
 import { Formik } from 'formik'
 import React from 'react'
-import useThunkDispatch from '../common/useThunkDispatch'
 import { requestCreateTrip } from './tripsActions'
 
+import { useDispatch } from 'react-redux'
 import TripForm from './TripForm'
 
 const AddTrip: React.FC = () => {
-  const dispatch = useThunkDispatch()
+  const dispatch = useDispatch()
 
   return (
     <section className="add-trip">
@@ -17,9 +17,9 @@ const AddTrip: React.FC = () => {
           onSubmit={(values, { setSubmitting, setStatus, resetForm }) => {
             setSubmitting(true)
 
-            dispatch(requestCreateTrip(values))
+            dispatch(requestCreateTrip(values) as any)
               .then(() => resetForm())
-              .catch(({ message }) => setStatus(message))
+              .catch(({ message }: { message: string }) => setStatus(message))
               .finally(() => setSubmitting(false))
           }}
         >

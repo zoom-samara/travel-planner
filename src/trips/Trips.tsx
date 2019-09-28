@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { userSelector } from '../auth/authSelector'
-import useThunkDispatch from '../common/useThunkDispatch'
 import Loading from '../components/Loading/Loading'
 import { IFilter, ITrip } from '../types/trip'
 import { IUser } from '../types/user'
@@ -20,10 +19,10 @@ interface ITripsProps {
 
 const Trips: React.FC<ITripsProps> = ({ user, list, filter }) => {
   const [loading, setLoading] = useState(true)
-  const dispatch = useThunkDispatch()
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getTripsList()).then(() => setLoading(false))
+    dispatch(getTripsList() as any).then(() => setLoading(false))
   }, [dispatch])
 
   return (

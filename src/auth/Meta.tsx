@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import useThunkDispatch from '../common/useThunkDispatch'
+import { useDispatch } from 'react-redux'
 import { requestCurrentUser } from './authActions'
 
 const Meta: React.FC = ({ children }) => {
-  const dispatch = useThunkDispatch()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(requestCurrentUser())
