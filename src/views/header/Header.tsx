@@ -1,14 +1,19 @@
 import { faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { createStructuredSelector } from 'reselect'
 import { requestLogout } from '../../auth/authActions'
 import { userSelector } from '../../auth/authSelector'
 import useThunkDispatch from '../../common/useThunkDispatch'
+import { IUser } from '../../types/user'
 
-const Header: React.FC = () => {
-  const user = useSelector(userSelector)
+interface IHeaderProps {
+  user?: IUser
+}
+
+const Header: React.FC<IHeaderProps> = ({ user }) => {
   const dispatch = useThunkDispatch()
   return (
     <div className="container">
@@ -30,9 +35,7 @@ const Header: React.FC = () => {
               </button>
             </>
           ) : (
-            <Link to="/auth/signin">
-              Sign In / Sign Up
-            </Link>
+            <Link to="/auth/signin">Sign In / Sign Up</Link>
           )}
         </div>
       </header>
@@ -40,4 +43,8 @@ const Header: React.FC = () => {
   )
 }
 
-export default Header
+export default connect(
+  createStructuredSelector({
+    user: userSelector,
+  })
+)(Header)

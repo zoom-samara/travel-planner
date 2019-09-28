@@ -1,13 +1,18 @@
 import { faPrint } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import useThunkDispatch from '../common/useThunkDispatch'
+import { IFilter } from '../types/trip'
 import { setFilter } from './tripsActions'
 import { filterTripsSelector } from './tripsSelector'
 
-const TripsFilter: React.FC = () => {
-  const filter = useSelector(filterTripsSelector)
+interface ITripsFilterProps {
+  filter: IFilter
+}
+
+const TripsFilter: React.FC<ITripsFilterProps> = ({ filter }) => {
   const dispatch = useThunkDispatch()
 
   const toggleVisibility = (value: boolean) => {
@@ -59,4 +64,8 @@ const TripsFilter: React.FC = () => {
   )
 }
 
-export default TripsFilter
+export default connect(
+  createStructuredSelector({
+    filter: filterTripsSelector,
+  })
+)(TripsFilter)

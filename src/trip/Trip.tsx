@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 import { RouteComponentProps } from 'react-router'
 import { Link } from 'react-router-dom'
+import { createStructuredSelector } from 'reselect'
 import { userSelector } from '../auth/authSelector'
 import useThunkDispatch from '../common/useThunkDispatch'
 import Loading from '../components/Loading/Loading'
+import { ITrip } from '../types/trip'
+import { IUser } from '../types/user'
 import EditTrip from './EditTrip'
 import { requestTripDetails } from './tripActions'
 import { tripSelector } from './tripSelector'
@@ -13,18 +16,23 @@ interface IRouteParams {
   id: string
 }
 
-const Trip: React.FC<RouteComponentProps<IRouteParams>> = ({ match }) => {
+interface ITripProps {
+  user: IUser
+  trip: ITrip
+}
+
+const Trip: React.FC<RouteComponentProps<IRouteParams> & ITripProps> = ({ match, user, trip }) => {
   const id = String(match.params.id)
   const [loading, setLoading] = useState(true)
-  const user = useSelector(userSelector)
-  const trip = useSelector(tripSelector)
   const dispatch = useThunkDispatch()
 
   useEffect(() => {
     dispatch(requestTripDetails(id)).then(() => setLoading(false))
   }, [dispatch, id])
 
-  if (loading) { return <Loading fullPage /> }
+  if (loading) {
+    return <Loading fullPage />
+  }
 
   return (
     <div className="container">
@@ -57,4 +65,9 @@ const Trip: React.FC<RouteComponentProps<IRouteParams>> = ({ match }) => {
   )
 }
 
-export default Trip
+export default connect(
+  createStructuredSelector({
+    user: userSelector,
+    trip: tripSelector,
+  })
+)(Trip)
