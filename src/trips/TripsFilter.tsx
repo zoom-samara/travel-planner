@@ -2,9 +2,9 @@ import { faPrint } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { filterTripsSelector } from './tripsSelector'
 import useThunkDispatch from '../common/useThunkDispatch'
 import { setFilter } from './tripsActions'
+import { filterTripsSelector } from './tripsSelector'
 
 const TripsFilter: React.FC = () => {
   const filter = useSelector(filterTripsSelector)

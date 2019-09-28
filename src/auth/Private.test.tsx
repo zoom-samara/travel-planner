@@ -1,12 +1,12 @@
-import Private from './Private'
-import Loading from '../components/Loading/Loading'
-import React from 'react'
 import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+import React from 'react'
 import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+import Loading from '../components/Loading/Loading'
 import store from '../store'
 import { setStatusUpdated, setUser } from './authActions'
-import { BrowserRouter } from 'react-router-dom'
+import Private from './Private'
 
 Enzyme.configure({ adapter: new Adapter() })
 

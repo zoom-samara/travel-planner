@@ -1,13 +1,13 @@
-import Trips from './Trips'
-import React from 'react'
 import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+import React from 'react'
 import { Provider } from 'react-redux'
-import store from '../store'
-import { setTrips } from './tripsActions'
-import { ITrip } from '../types/trip'
-import { setUser } from '../auth/authActions'
 import { BrowserRouter } from 'react-router-dom'
+import { setUser } from '../auth/authActions'
+import store from '../store'
+import { ITrip } from '../types/trip'
+import Trips from './Trips'
+import { setTrips } from './tripsActions'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -38,11 +38,11 @@ describe('Trips Component', () => {
     store.dispatch(
       setTrips(([
         {
-          id: '0',
-          uid: 'user_id',
-          startDate: '123',
-          endDate: '321',
           destination: 'New York',
+          endDate: '321',
+          id: '0',
+          startDate: '123',
+          uid: 'user_id',
         },
       ] as any) as ITrip[])
     )

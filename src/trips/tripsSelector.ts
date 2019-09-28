@@ -1,9 +1,9 @@
-import { get } from 'lodash/fp'
-import { Selector } from '../types/common'
-import { ITrip, IFilter } from '../types/trip'
 import { compareAsc } from 'date-fns'
+import { get } from 'lodash/fp'
 import { createSelector } from 'reselect'
 import { userSelector } from '../auth/authSelector'
+import { Selector } from '../types/common'
+import { IFilter, ITrip } from '../types/trip'
 
 export const tripsSelector: Selector<ITrip[]> = get('trips.list')
 export const filterTripsSelector: Selector<IFilter> = get('trips.filter')

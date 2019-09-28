@@ -16,9 +16,9 @@ interface IProps {
 const TripsItem: React.FC<IProps> = ({ trip, user, showMyTrips }) => (
   <li
     className={cn('trips-item', {
-      '-prev': isBefore(new Date(trip.startDate), new Date()),
       '-next-month':
         isAfter(new Date(trip.startDate), new Date()) && isBefore(new Date(trip.startDate), addMonths(new Date(), 1)),
+      '-prev': isBefore(new Date(trip.startDate), new Date()),
     })}
   >
     <div className="trips-item_title-row">

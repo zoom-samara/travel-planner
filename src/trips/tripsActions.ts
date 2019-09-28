@@ -5,7 +5,7 @@ import { identity } from 'lodash/fp'
 import { createAction } from 'redux-actions'
 
 import { Action, ThunkAction } from '../types/common'
-import { INewTrip, ITrip, IFilter } from '../types/trip'
+import { IFilter, INewTrip, ITrip } from '../types/trip'
 
 export const ADD_TRIP = 'TRIPS/ADD_TRIP'
 export type ADD_TRIP = Action<ITrip>
@@ -25,8 +25,8 @@ export const requestCreateTrip = (trip: INewTrip): ThunkAction<Promise<void>> =>
     .collection('trips')
     .add({
       ...trip,
-      uid: firebase.auth().currentUser!.uid,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      uid: firebase.auth().currentUser!.uid,
     })
     .then((docRef) => {
       firebase
@@ -39,7 +39,7 @@ export const requestCreateTrip = (trip: INewTrip): ThunkAction<Promise<void>> =>
             addTrip({
               id: doc.id,
               ...doc.data(),
-            } as ITrip)
+            } as any as ITrip)
           )
         })
     })
@@ -58,7 +58,7 @@ export const getTripsList = (): ThunkAction<Promise<void>> => async (dispatch) =
           {
             id: doc.id,
             ...doc.data(),
-          } as ITrip,
+          } as any as ITrip,
         ]
       })
 
