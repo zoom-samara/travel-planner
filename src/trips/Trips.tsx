@@ -16,7 +16,7 @@ const Trips: React.FC = () => {
   const dispatch = useThunkDispatch()
   const user = useSelector(userSelector)
   const list = useSelector(filteredTripsSelector)
-  const showMyTrips = useSelector(filterTripsSelector).onlyMyTrips
+  const filter = useSelector(filterTripsSelector)
 
   useEffect(() => {
     dispatch(getTripsList()).then(() => setLoading(false))
@@ -30,7 +30,7 @@ const Trips: React.FC = () => {
         {list.length > 0 ? (
           <ul className="trips_list">
             {list.map((trip: ITrip) => (
-              <TripsItem key={trip.id} trip={trip} user={user} showMyTrips={showMyTrips} />
+              <TripsItem key={trip.id} trip={trip} user={user} showMyTrips={filter.onlyMyTrips} />
             ))}
           </ul>
         ) : (
