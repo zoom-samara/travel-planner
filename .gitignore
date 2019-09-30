@@ -29,4 +29,4 @@ yarn-error.log*
 firebase-debug.log
 .firebase
 .firebaserc
-/src/firebase_credentials.json
+# /src/firebase_credentials.json
