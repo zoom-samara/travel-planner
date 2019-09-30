@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { RouteComponentProps } from 'react-router'
 import { Link } from 'react-router-dom'
-import { createStructuredSelector } from 'reselect'
 import { userSelector } from '../auth/authSelector'
+import createTypedStructuredSelector from "../common/createTypedStructuredSelector";
 import Loading from '../components/Loading/Loading'
-import { Store, ThunkDispatch } from '../types/common'
+import { ThunkDispatch } from '../types/common'
 import { ITrip } from '../types/trip'
 import { IUser } from '../types/user'
 import EditTrip from './EditTrip'
@@ -66,7 +66,7 @@ const Trip: React.FC<RouteComponentProps<IRouteParams> & ISelectedProps> = ({ ma
 }
 
 export default connect(
-  createStructuredSelector<Store, ISelectedProps>({
+  createTypedStructuredSelector<ISelectedProps>({
     user: userSelector,
     trip: tripSelector,
   })

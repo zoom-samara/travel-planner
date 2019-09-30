@@ -2,8 +2,7 @@ import { faPrint } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { connect, useDispatch } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { Store } from '../types/common'
+import createTypedStructuredSelector from "../common/createTypedStructuredSelector";
 import { ITripsFilter } from '../types/trip'
 import { setFilter } from './tripsActions'
 import { filterTripsSelector } from './tripsSelector'
@@ -62,7 +61,7 @@ const TripsFilter: React.FC<ISelectedProps> = ({ filter }) => {
 }
 
 export default connect(
-  createStructuredSelector<Store, ISelectedProps>({
+  createTypedStructuredSelector<ISelectedProps>({
     filter: filterTripsSelector,
   })
 )(TripsFilter)

@@ -1,9 +1,9 @@
 import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import createTypedStructuredSelector from "../common/createTypedStructuredSelector";
 import TripForm from '../trips/TripForm'
-import { Store, ThunkDispatch } from '../types/common'
+import { ThunkDispatch } from '../types/common'
 import { ITrip } from '../types/trip'
 import { requestRemoveTrip, requestUpdateTrip } from './tripActions'
 import { tripSelector } from './tripSelector'
@@ -67,7 +67,7 @@ const EditTrip: React.FC<ISelectedProps> = ({ trip }) => {
 }
 
 export default connect(
-  createStructuredSelector<Store, ISelectedProps>({
+  createTypedStructuredSelector<ISelectedProps>({
     trip: tripSelector,
   })
 )(EditTrip)

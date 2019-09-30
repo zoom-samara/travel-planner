@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
 import { userSelector } from '../auth/authSelector'
+import createTypedStructuredSelector from '../common/createTypedStructuredSelector'
 import Loading from '../components/Loading/Loading'
-import { Store, ThunkDispatch } from '../types/common'
+import { ThunkDispatch } from '../types/common'
 import { ITrip, ITripsFilter } from '../types/trip'
 import { IUser } from '../types/user'
 import AddTrip from './AddTrip'
@@ -53,7 +53,7 @@ const Trips: React.FC<ISelectedProps> = ({ user, list, filter }) => {
 }
 
 export default connect(
-  createStructuredSelector<Store, ISelectedProps>({
+  createTypedStructuredSelector<ISelectedProps>({
     user: userSelector,
     list: filteredTripsSelector,
     filter: filterTripsSelector,

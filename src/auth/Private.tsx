@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
-import { createStructuredSelector } from 'reselect'
+import createTypedStructuredSelector from "../common/createTypedStructuredSelector";
 import Loading from '../components/Loading/Loading'
-import { Store } from '../types/common'
 import { IUser } from '../types/user'
 import { authStatusSelector, userSelector } from './authSelector'
 
@@ -33,7 +32,7 @@ const Private: React.FC<IPrivateProps & ISelectedProps> = ({ children, isPrivate
 }
 
 export default connect(
-  createStructuredSelector<Store, ISelectedProps>({
+  createTypedStructuredSelector<ISelectedProps>({
     user: userSelector,
     meta: authStatusSelector,
   })

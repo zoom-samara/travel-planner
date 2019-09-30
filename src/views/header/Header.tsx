@@ -3,10 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { createStructuredSelector } from 'reselect'
 import { requestLogout } from '../../auth/authActions'
 import { userSelector } from '../../auth/authSelector'
-import {Store} from "../../types/common";
+import createTypedStructuredSelector from '../../common/createTypedStructuredSelector'
 import { IUser } from '../../types/user'
 
 interface ISelectedProps {
@@ -44,7 +43,7 @@ const Header: React.FC<ISelectedProps> = ({ user }) => {
 }
 
 export default connect(
-  createStructuredSelector<Store, ISelectedProps>({
+  createTypedStructuredSelector<ISelectedProps>({
     user: userSelector,
   })
 )(Header)
