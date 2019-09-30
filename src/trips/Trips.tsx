@@ -18,7 +18,7 @@ interface ITripsProps {
   user: IUser
 }
 
-export const Trips: React.FC<ITripsProps> = ({ user, list, filter }) => {
+const Trips: React.FC<ITripsProps> = ({ user, list, filter }) => {
   const [loading, setLoading] = useState(true)
   const dispatch: ReduxDispatch = useDispatch()
 
