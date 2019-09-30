@@ -24,24 +24,23 @@ export const clearState = (): ThunkAction<void> => (dispatch) => {
   history.push('/auth/signin')
 }
 
-export const requestCurrentUser = (): ThunkAction<Promise<void>> => async (dispatch) => {
+export const requestCurrentUser = (): ThunkAction<void> => (dispatch) => {
   const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       dispatch(
-        setUser({
+        setUser(({
           displayName: user.displayName,
           email: user.email,
           uid: user.uid,
-        } as any as IUser)
+        } as any) as IUser)
       )
     }
-
     dispatch(setStatusUpdated(true))
     unsubscribe()
   })
 }
 
-export const requestLogout = (): ThunkAction<Promise<void>> => async (dispatch) =>
+export const requestLogout = (): ThunkAction<Promise<void>> => (dispatch) =>
   firebase
     .auth()
     .signOut()
@@ -52,7 +51,7 @@ export const requestLogout = (): ThunkAction<Promise<void>> => async (dispatch) 
       })
     })
 
-export const requestSignIn = (userData: IAuthUser): ThunkAction<Promise<void>> => async (dispatch) =>
+export const requestSignIn = (userData: IAuthUser): ThunkAction<Promise<void>> => (dispatch) =>
   firebase
     .auth()
     .signInWithEmailAndPassword(userData.email, userData.password)
@@ -64,7 +63,7 @@ export const requestSignIn = (userData: IAuthUser): ThunkAction<Promise<void>> =
     })
     .catch((err) => Promise.reject(err))
 
-export const requestSignUp = (newUser: IAuthUser): ThunkAction<Promise<void>> => async (dispatch) =>
+export const requestSignUp = (newUser: IAuthUser): ThunkAction<Promise<void>> => (dispatch) =>
   firebase
     .auth()
     .createUserWithEmailAndPassword(newUser.email, newUser.password)

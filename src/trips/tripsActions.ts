@@ -19,7 +19,7 @@ export const SET_TRIPS = 'TRIPS/SET_TRIPS'
 export type SET_TRIPS = Action<ITrip[]>
 export const setTrips = createAction<ITrip[], ITrip[]>(SET_TRIPS, identity)
 
-export const requestCreateTrip = (trip: INewTrip): ThunkAction<Promise<void>> => async (dispatch) =>
+export const requestCreateTrip = (trip: INewTrip): ThunkAction<Promise<void>> => (dispatch) =>
   firebase
     .firestore()
     .collection('trips')
@@ -36,16 +36,16 @@ export const requestCreateTrip = (trip: INewTrip): ThunkAction<Promise<void>> =>
         .get()
         .then((doc) => {
           dispatch(
-            addTrip({
+            addTrip(({
               id: doc.id,
               ...doc.data(),
-            } as any as ITrip)
+            } as any) as ITrip)
           )
         })
     })
     .catch((err) => Promise.reject(err))
 
-export const getTripsList = (): ThunkAction<Promise<void>> => async (dispatch) =>
+export const getTripsList = (): ThunkAction<Promise<void>> => (dispatch) =>
   firebase
     .firestore()
     .collection('trips')
@@ -55,10 +55,10 @@ export const getTripsList = (): ThunkAction<Promise<void>> => async (dispatch) =
       querySnapshot.forEach((doc) => {
         tripsList = [
           ...tripsList,
-          {
+          ({
             id: doc.id,
             ...doc.data(),
-          } as any as ITrip,
+          } as any) as ITrip,
         ]
       })
 
