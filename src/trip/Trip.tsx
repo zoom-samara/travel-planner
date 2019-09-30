@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { userSelector } from '../auth/authSelector'
 import Loading from '../components/Loading/Loading'
-import {ReduxDispatch} from "../types/common";
+import { ReduxDispatch, Store } from '../types/common'
 import { ITrip } from '../types/trip'
 import { IUser } from '../types/user'
 import EditTrip from './EditTrip'
@@ -16,12 +16,12 @@ interface IRouteParams {
   id: string
 }
 
-interface ITripProps {
+interface ISelectedProps {
   user: IUser
   trip: ITrip
 }
 
-const Trip: React.FC<RouteComponentProps<IRouteParams> & ITripProps> = ({ match, user, trip }) => {
+const Trip: React.FC<RouteComponentProps<IRouteParams> & ISelectedProps> = ({ match, user, trip }) => {
   const id = String(match.params.id)
   const [loading, setLoading] = useState(true)
   const dispatch: ReduxDispatch = useDispatch()
@@ -66,7 +66,7 @@ const Trip: React.FC<RouteComponentProps<IRouteParams> & ITripProps> = ({ match,
 }
 
 export default connect(
-  createStructuredSelector({
+  createStructuredSelector<Store, ISelectedProps>({
     user: userSelector,
     trip: tripSelector,
   })

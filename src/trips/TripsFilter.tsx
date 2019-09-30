@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import {ReduxDispatch} from "../types/common";
+import { ReduxDispatch, Store } from '../types/common'
 import { ITripsFilter } from '../types/trip'
 import { setFilter } from './tripsActions'
 import { filterTripsSelector } from './tripsSelector'
@@ -15,11 +15,8 @@ interface ITripsFilterProps {
 const TripsFilter: React.FC<ITripsFilterProps> = ({ filter }) => {
   const dispatch: ReduxDispatch = useDispatch()
 
-  const toggleVisibility = (value: boolean) => {
-    dispatch(setFilter({ ...filter, onlyMyTrips: value }))
-  }
-  const onChangeSearch = (value: string) => {
-    dispatch(setFilter({ ...filter, search: value }))
+  const updateFilter = (values: ITripsFilter) => {
+    dispatch(setFilter(values))
   }
 
   return (
@@ -31,7 +28,7 @@ const TripsFilter: React.FC<ITripsFilterProps> = ({ filter }) => {
             className="form-control"
             type="text"
             defaultValue={filter.search}
-            onChange={(e) => onChangeSearch(e.target.value)}
+            onChange={(e) => updateFilter({ ...filter, search: e.target.value })}
             placeholder="Find by Destination"
           />
         </div>
@@ -47,7 +44,7 @@ const TripsFilter: React.FC<ITripsFilterProps> = ({ filter }) => {
             type="checkbox"
             className="filter_visibility-input"
             checked={filter.onlyMyTrips}
-            onChange={() => toggleVisibility(!filter.onlyMyTrips)}
+            onChange={() => updateFilter({ ...filter, onlyMyTrips: !filter.onlyMyTrips })}
           />
         </div>
 
@@ -65,7 +62,7 @@ const TripsFilter: React.FC<ITripsFilterProps> = ({ filter }) => {
 }
 
 export default connect(
-  createStructuredSelector({
+  createStructuredSelector<Store, ITripsFilterProps>({
     filter: filterTripsSelector,
   })
 )(TripsFilter)

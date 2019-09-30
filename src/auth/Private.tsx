@@ -3,16 +3,20 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 import { createStructuredSelector } from 'reselect'
 import Loading from '../components/Loading/Loading'
+import { Store } from '../types/common'
 import { IUser } from '../types/user'
 import { authStatusSelector, userSelector } from './authSelector'
 
 interface IPrivateProps {
   isPrivate: boolean
+}
+
+interface ISelectedProps {
   user: IUser
   meta: boolean
 }
 
-const Private: React.FC<IPrivateProps> = ({ children, isPrivate, user, meta }) => {
+const Private: React.FC<IPrivateProps & ISelectedProps> = ({ children, isPrivate, user, meta }) => {
   if (!meta) {
     return <Loading fullPage />
   }
@@ -29,7 +33,7 @@ const Private: React.FC<IPrivateProps> = ({ children, isPrivate, user, meta }) =
 }
 
 export default connect(
-  createStructuredSelector({
+  createStructuredSelector<Store, ISelectedProps>({
     user: userSelector,
     meta: authStatusSelector,
   })

@@ -3,7 +3,7 @@ import { connect, useDispatch } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { userSelector } from '../auth/authSelector'
 import Loading from '../components/Loading/Loading'
-import {ReduxDispatch} from "../types/common";
+import {ReduxDispatch, Store} from '../types/common'
 import { ITrip, ITripsFilter } from '../types/trip'
 import { IUser } from '../types/user'
 import AddTrip from './AddTrip'
@@ -53,7 +53,7 @@ const Trips: React.FC<ITripsProps> = ({ user, list, filter }) => {
 }
 
 export default connect(
-  createStructuredSelector({
+  createStructuredSelector<Store, ITripsProps>({
     user: userSelector,
     list: filteredTripsSelector,
     filter: filterTripsSelector,

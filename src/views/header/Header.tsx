@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { requestLogout } from '../../auth/authActions'
 import { userSelector } from '../../auth/authSelector'
-import {ReduxDispatch} from "../../types/common";
+import {ReduxDispatch, Store} from "../../types/common";
 import { IUser } from '../../types/user'
 
 interface IHeaderProps {
@@ -44,7 +44,7 @@ const Header: React.FC<IHeaderProps> = ({ user }) => {
 }
 
 export default connect(
-  createStructuredSelector({
+  createStructuredSelector<Store, IHeaderProps>({
     user: userSelector,
   })
 )(Header)

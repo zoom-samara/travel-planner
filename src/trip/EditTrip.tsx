@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import TripForm from '../trips/TripForm'
-import {ReduxDispatch} from "../types/common";
+import {ReduxDispatch, Store} from '../types/common'
 import { ITrip } from '../types/trip'
 import { requestRemoveTrip, requestUpdateTrip } from './tripActions'
 import { tripSelector } from './tripSelector'
@@ -14,9 +14,9 @@ interface IEditTripProps {
 const EditTrip: React.FC<IEditTripProps> = ({ trip }) => {
   const [isEdit, onToggleEdit] = useState(false)
   const dispatch: ReduxDispatch = useDispatch()
-  const onRemove = async () => {
+  const onRemove = async (id: string) => {
     try {
-      await dispatch(requestRemoveTrip(trip.id))
+      await dispatch(requestRemoveTrip(id))
     } catch (err) {
       window.alert(err)
     }
@@ -32,7 +32,7 @@ const EditTrip: React.FC<IEditTripProps> = ({ trip }) => {
         <button
           type="button"
           className="edit-trip_control -remove"
-          onClick={() => window.confirm('Do you really want to remove the trip?') && onRemove()}
+          onClick={() => window.confirm('Do you really want to remove the trip?') && onRemove(trip.id)}
         >
           Remove Trip
         </button>
@@ -67,7 +67,7 @@ const EditTrip: React.FC<IEditTripProps> = ({ trip }) => {
 }
 
 export default connect(
-  createStructuredSelector({
+  createStructuredSelector<Store, IEditTripProps>({
     trip: tripSelector,
   })
 )(EditTrip)
