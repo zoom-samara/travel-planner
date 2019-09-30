@@ -16,7 +16,11 @@ import Trip from './trip/Trip'
 import Trips from './trips/Trips'
 import Header from './views/header/Header'
 
-const p404 = () => <h1>404 page not found</h1>
+const P404: React.FC = () => (
+  <div className="container">
+    <h1>404 page not found</h1>
+  </div>
+)
 
 const App: React.FC = () => {
   return (
@@ -47,7 +51,7 @@ const App: React.FC = () => {
                   </Private>
                 )}
               />
-              <Route component={p404} />
+              <Route component={P404} />
             </Switch>
           </Meta>
         </div>
