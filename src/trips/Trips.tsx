@@ -12,13 +12,13 @@ import TripsFilter from './TripsFilter'
 import TripsItem from './TripsItem'
 import { filteredTripsSelector, filterTripsSelector } from './tripsSelector'
 
-interface ITripsProps {
+interface ISelectedProps {
   filter: ITripsFilter
   list: ITrip[]
   user: IUser
 }
 
-const Trips: React.FC<ITripsProps> = ({ user, list, filter }) => {
+const Trips: React.FC<ISelectedProps> = ({ user, list, filter }) => {
   const [loading, setLoading] = useState(true)
   const dispatch: ReduxDispatch = useDispatch()
 
@@ -53,7 +53,7 @@ const Trips: React.FC<ITripsProps> = ({ user, list, filter }) => {
 }
 
 export default connect(
-  createStructuredSelector<Store, ITripsProps>({
+  createStructuredSelector<Store, ISelectedProps>({
     user: userSelector,
     list: filteredTripsSelector,
     filter: filterTripsSelector,

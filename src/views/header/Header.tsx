@@ -9,11 +9,11 @@ import { userSelector } from '../../auth/authSelector'
 import {ReduxDispatch, Store} from "../../types/common";
 import { IUser } from '../../types/user'
 
-interface IHeaderProps {
+interface ISelectedProps {
   user?: IUser
 }
 
-const Header: React.FC<IHeaderProps> = ({ user }) => {
+const Header: React.FC<ISelectedProps> = ({ user }) => {
   const dispatch: ReduxDispatch = useDispatch()
   return (
     <div className="container">
@@ -44,7 +44,7 @@ const Header: React.FC<IHeaderProps> = ({ user }) => {
 }
 
 export default connect(
-  createStructuredSelector<Store, IHeaderProps>({
+  createStructuredSelector<Store, ISelectedProps>({
     user: userSelector,
   })
 )(Header)

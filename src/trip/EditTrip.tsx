@@ -8,10 +8,10 @@ import { ITrip } from '../types/trip'
 import { requestRemoveTrip, requestUpdateTrip } from './tripActions'
 import { tripSelector } from './tripSelector'
 
-interface IEditTripProps {
+interface ISelectedProps {
   trip: ITrip
 }
-const EditTrip: React.FC<IEditTripProps> = ({ trip }) => {
+const EditTrip: React.FC<ISelectedProps> = ({ trip }) => {
   const [isEdit, onToggleEdit] = useState(false)
   const dispatch: ReduxDispatch = useDispatch()
   const onRemove = async (id: string) => {
@@ -67,7 +67,7 @@ const EditTrip: React.FC<IEditTripProps> = ({ trip }) => {
 }
 
 export default connect(
-  createStructuredSelector<Store, IEditTripProps>({
+  createStructuredSelector<Store, ISelectedProps>({
     trip: tripSelector,
   })
 )(EditTrip)

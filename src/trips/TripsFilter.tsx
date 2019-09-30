@@ -8,11 +8,11 @@ import { ITripsFilter } from '../types/trip'
 import { setFilter } from './tripsActions'
 import { filterTripsSelector } from './tripsSelector'
 
-interface ITripsFilterProps {
+interface ISelectedProps {
   filter: ITripsFilter
 }
 
-const TripsFilter: React.FC<ITripsFilterProps> = ({ filter }) => {
+const TripsFilter: React.FC<ISelectedProps> = ({ filter }) => {
   const dispatch: ReduxDispatch = useDispatch()
 
   const updateFilter = (values: ITripsFilter) => {
@@ -62,7 +62,7 @@ const TripsFilter: React.FC<ITripsFilterProps> = ({ filter }) => {
 }
 
 export default connect(
-  createStructuredSelector<Store, ITripsFilterProps>({
+  createStructuredSelector<Store, ISelectedProps>({
     filter: filterTripsSelector,
   })
 )(TripsFilter)
