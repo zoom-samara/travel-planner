@@ -1,13 +1,11 @@
 import { Formik } from 'formik'
 import React from 'react'
+import useThunkDispatch from '../common/useThunkDispatch'
+import TripForm from './TripForm'
 import { requestCreateTrip } from './tripsActions'
 
-import { useDispatch } from 'react-redux'
-import { ThunkDispatch } from '../types/common'
-import TripForm from './TripForm'
-
 const AddTrip: React.FC = () => {
-  const dispatch: ThunkDispatch = useDispatch()
+  const dispatch = useThunkDispatch()
 
   return (
     <section className="add-trip">

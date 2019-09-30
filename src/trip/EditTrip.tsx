@@ -1,9 +1,9 @@
 import { Formik } from 'formik'
 import React, { useState } from 'react'
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import createTypedStructuredSelector from "../common/createTypedStructuredSelector";
+import useThunkDispatch from "../common/useThunkDispatch";
 import TripForm from '../trips/TripForm'
-import { ThunkDispatch } from '../types/common'
 import { ITrip } from '../types/trip'
 import { requestRemoveTrip, requestUpdateTrip } from './tripActions'
 import { tripSelector } from './tripSelector'
@@ -13,7 +13,7 @@ interface ISelectedProps {
 }
 const EditTrip: React.FC<ISelectedProps> = ({ trip }) => {
   const [isEdit, onToggleEdit] = useState(false)
-  const dispatch: ThunkDispatch = useDispatch()
+  const dispatch = useThunkDispatch()
   const onRemove = async (id: string) => {
     try {
       await dispatch(requestRemoveTrip(id))
