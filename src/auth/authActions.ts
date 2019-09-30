@@ -64,7 +64,7 @@ export const requestSignIn = (userData: IAuthUser): ThunkAction<Promise<void>> =
     })
     .catch((err) => Promise.reject(err))
 
-export const requestSignUp = (newUser: IAuthUser): ThunkAction<Promise<void>> => async (dispatch: any) =>
+export const requestSignUp = (newUser: IAuthUser): ThunkAction<Promise<void>> => async (dispatch) =>
   firebase
     .auth()
     .createUserWithEmailAndPassword(newUser.email, newUser.password)
