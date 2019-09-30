@@ -3,48 +3,43 @@ import Adapter from 'enzyme-adapter-react-16'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import { setUser } from '../auth/authActions'
 import store from '../store'
-import { ITrip } from '../types/trip'
-import Trips from './Trips'
-import { setTrips } from './tripsActions'
+import { ITrip, ITripsFilter } from '../types/trip'
+import { IUser } from '../types/user'
+import { Trips } from './Trips'
 
 Enzyme.configure({ adapter: new Adapter() })
+
+const defaultFilter: ITripsFilter = { search: '', onlyMyTrips: true }
+const defaultTrips: ITrip[] = []
+
+const defaultUser: IUser = { displayName: 'displayName', email: 'email', uid: 'user_id' }
 
 describe('Trips Component', () => {
   it('By Default Should be Empty List', () => {
     const wrapper = Enzyme.shallow(
       <Provider store={store}>
-        <BrowserRouter>
-          <Trips />
-        </BrowserRouter>
+        <Trips filter={defaultFilter} list={defaultTrips} user={defaultUser} />
       </Provider>
     )
 
     expect(wrapper.render()).toMatchSnapshot()
   })
 
-  it('If user have trips', () => {
+  it('User have a trip', () => {
+    const trips: ITrip[] = [
+      {
+        destination: 'New York',
+        endDate: '321',
+        id: '0',
+        startDate: '123',
+        uid: 'user_id',
+      },
+    ]
     const wrapper = Enzyme.shallow(
       <Provider store={store}>
-        <BrowserRouter>
-          <Trips />
-        </BrowserRouter>
+        <Trips filter={defaultFilter} list={trips} user={defaultUser} />
       </Provider>
-    )
-
-    store.dispatch(setUser({ displayName: 'displayName', email: 'email', uid: 'user_id' }))
-
-    store.dispatch(
-      setTrips(([
-        {
-          destination: 'New York',
-          endDate: '321',
-          id: '0',
-          startDate: '123',
-          uid: 'user_id',
-        },
-      ] as any) as ITrip[])
     )
 
     expect(wrapper.render()).toMatchSnapshot()
