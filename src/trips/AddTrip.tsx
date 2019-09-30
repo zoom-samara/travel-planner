@@ -3,11 +3,11 @@ import React from 'react'
 import { requestCreateTrip } from './tripsActions'
 
 import { useDispatch } from 'react-redux'
-import { ReduxDispatch } from '../types/common'
+import { ThunkDispatch } from '../types/common'
 import TripForm from './TripForm'
 
 const AddTrip: React.FC = () => {
-  const dispatch: ReduxDispatch = useDispatch()
+  const dispatch: ThunkDispatch = useDispatch()
 
   return (
     <section className="add-trip">

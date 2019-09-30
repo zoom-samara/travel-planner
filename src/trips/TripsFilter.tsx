@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { ReduxDispatch, Store } from '../types/common'
+import { Store } from '../types/common'
 import { ITripsFilter } from '../types/trip'
 import { setFilter } from './tripsActions'
 import { filterTripsSelector } from './tripsSelector'
@@ -13,7 +13,7 @@ interface ISelectedProps {
 }
 
 const TripsFilter: React.FC<ISelectedProps> = ({ filter }) => {
-  const dispatch: ReduxDispatch = useDispatch()
+  const dispatch = useDispatch()
 
   const updateFilter = (values: ITripsFilter) => {
     dispatch(setFilter(values))

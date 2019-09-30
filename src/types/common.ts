@@ -1,5 +1,5 @@
 import { Action as ReduxAction } from 'redux-actions'
-import { ThunkAction as ReduxThunkAction, ThunkDispatch } from 'redux-thunk'
+import { ThunkAction as ReduxThunkAction, ThunkDispatch as ReduxThunkDispatch } from 'redux-thunk'
 import { Selector as ReselectSelector } from 'reselect'
 
 import store from '../store'
@@ -12,4 +12,4 @@ export type Action<Payload> = ReduxAction<Payload>
 
 export type ThunkAction<Return = void> = ReduxThunkAction<Return, Store, undefined, Action<any>>
 
-export type ReduxDispatch = ThunkDispatch<Store, any, Action<any>>;
+export type ThunkDispatch = ReduxThunkDispatch<Store, any, Action<any>>;

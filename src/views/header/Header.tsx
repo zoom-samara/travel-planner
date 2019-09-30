@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { requestLogout } from '../../auth/authActions'
 import { userSelector } from '../../auth/authSelector'
-import {ReduxDispatch, Store} from "../../types/common";
+import {Store} from "../../types/common";
 import { IUser } from '../../types/user'
 
 interface ISelectedProps {
@@ -14,7 +14,7 @@ interface ISelectedProps {
 }
 
 const Header: React.FC<ISelectedProps> = ({ user }) => {
-  const dispatch: ReduxDispatch = useDispatch()
+  const dispatch = useDispatch()
   return (
     <div className="container">
       <header className="header">

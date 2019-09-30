@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { userSelector } from '../auth/authSelector'
 import Loading from '../components/Loading/Loading'
-import { ReduxDispatch, Store } from '../types/common'
+import { Store, ThunkDispatch } from '../types/common'
 import { ITrip } from '../types/trip'
 import { IUser } from '../types/user'
 import EditTrip from './EditTrip'
@@ -24,7 +24,7 @@ interface ISelectedProps {
 const Trip: React.FC<RouteComponentProps<IRouteParams> & ISelectedProps> = ({ match, user, trip }) => {
   const id = String(match.params.id)
   const [loading, setLoading] = useState(true)
-  const dispatch: ReduxDispatch = useDispatch()
+  const dispatch: ThunkDispatch = useDispatch()
 
   useEffect(() => {
     dispatch(requestTripDetails(id)).then(() => setLoading(false))

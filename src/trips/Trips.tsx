@@ -3,7 +3,7 @@ import { connect, useDispatch } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { userSelector } from '../auth/authSelector'
 import Loading from '../components/Loading/Loading'
-import { ReduxDispatch, Store } from '../types/common'
+import { Store, ThunkDispatch } from '../types/common'
 import { ITrip, ITripsFilter } from '../types/trip'
 import { IUser } from '../types/user'
 import AddTrip from './AddTrip'
@@ -20,7 +20,7 @@ interface ISelectedProps {
 
 const Trips: React.FC<ISelectedProps> = ({ user, list, filter }) => {
   const [loading, setLoading] = useState(true)
-  const dispatch: ReduxDispatch = useDispatch()
+  const dispatch: ThunkDispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getTripsList()).then(() => setLoading(false))
