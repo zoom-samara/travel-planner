@@ -2,6 +2,7 @@ import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import React from 'react'
 import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 import store from '../store'
 import { ITrip, ITripsFilter } from '../types/trip'
 import { IUser } from '../types/user'
@@ -18,7 +19,9 @@ describe('Trips Component', () => {
   it('By Default Should be Empty List', () => {
     const wrapper = Enzyme.shallow(
       <Provider store={store}>
-        <Trips filter={defaultFilter} list={defaultTrips} user={defaultUser} />
+        <BrowserRouter>
+          <Trips filter={defaultFilter} list={defaultTrips} user={defaultUser} />
+        </BrowserRouter>
       </Provider>
     )
 
@@ -37,7 +40,9 @@ describe('Trips Component', () => {
     ]
     const wrapper = Enzyme.shallow(
       <Provider store={store}>
-        <Trips filter={defaultFilter} list={trips} user={defaultUser} />
+        <BrowserRouter>
+          <Trips filter={defaultFilter} list={trips} user={defaultUser} />
+        </BrowserRouter>
       </Provider>
     )
 
