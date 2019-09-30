@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { userSelector } from '../auth/authSelector'
 import createTypedStructuredSelector from '../common/createTypedStructuredSelector'
-import useThunkDispatch from "../common/useThunkDispatch";
+import useThunkDispatch from '../common/useThunkDispatch'
 import Loading from '../components/Loading/Loading'
 import { ITrip, ITripsFilter } from '../types/trip'
 import { IUser } from '../types/user'

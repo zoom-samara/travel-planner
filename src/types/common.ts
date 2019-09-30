@@ -12,4 +12,4 @@ export type Action<Payload> = ReduxAction<Payload>
 
 export type ThunkAction<Return = void> = ReduxThunkAction<Return, Store, undefined, Action<any>>
 
-export type ThunkDispatch = ReduxThunkDispatch<Store, any, Action<any>>;
+export type ThunkDispatch = ReduxThunkDispatch<Store, any, Action<any>>

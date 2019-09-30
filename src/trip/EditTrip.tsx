@@ -1,8 +1,8 @@
 import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import createTypedStructuredSelector from "../common/createTypedStructuredSelector";
-import useThunkDispatch from "../common/useThunkDispatch";
+import createTypedStructuredSelector from '../common/createTypedStructuredSelector'
+import useThunkDispatch from '../common/useThunkDispatch'
 import TripForm from '../trips/TripForm'
 import { ITrip } from '../types/trip'
 import { requestRemoveTrip, requestUpdateTrip } from './tripActions'

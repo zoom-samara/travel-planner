@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { RouteComponentProps } from 'react-router'
 import { Link } from 'react-router-dom'
 import { userSelector } from '../auth/authSelector'
-import createTypedStructuredSelector from "../common/createTypedStructuredSelector";
-import useThunkDispatch from "../common/useThunkDispatch";
+import createTypedStructuredSelector from '../common/createTypedStructuredSelector'
+import useThunkDispatch from '../common/useThunkDispatch'
 import Loading from '../components/Loading/Loading'
 import { ITrip } from '../types/trip'
 import { IUser } from '../types/user'

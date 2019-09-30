@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
-import createTypedStructuredSelector from "../common/createTypedStructuredSelector";
+import createTypedStructuredSelector from '../common/createTypedStructuredSelector'
 import Loading from '../components/Loading/Loading'
 import { IUser } from '../types/user'
 import { authStatusSelector, userSelector } from './authSelector'
