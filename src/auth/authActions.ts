@@ -58,7 +58,7 @@ export const requestSignIn = (userData: IAuthUser): ThunkAction<Promise<void>> =
     .signInWithEmailAndPassword(userData.email, userData.password)
     .then(({ user }) => {
       if (user) {
-        dispatch(setUser(user as any as IUser))
+        dispatch(setUser(user as IUser))
         history.push('/service/trips')
       }
     })
