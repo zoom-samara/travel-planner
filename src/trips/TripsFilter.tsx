@@ -1,6 +1,6 @@
 import { faPrint } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { memo } from 'react'
 import { useDispatch } from 'react-redux'
 import { ITripsFilter } from '../types/trip'
 import { setFilter } from './tripsActions'
@@ -58,4 +58,4 @@ const TripsFilter: React.FC<ITripsFilterProps> = ({ filter }) => {
   )
 }
 
-export default TripsFilter
+export default memo(TripsFilter)

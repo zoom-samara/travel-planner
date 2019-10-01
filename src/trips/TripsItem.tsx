@@ -2,7 +2,7 @@ import { faCalendarAlt, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import cn from 'classnames'
 import { addMonths, differenceInDays, isAfter, isBefore } from 'date-fns'
-import React from 'react'
+import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { ITrip } from '../types/trip'
 import { IUser } from '../types/user'
@@ -46,4 +46,4 @@ const TripsItem: React.FC<ITripsItemProps> = ({ trip, user, showMyTrips }) => (
   </li>
 )
 
-export default TripsItem
+export default memo(TripsItem)
