@@ -28,7 +28,7 @@ const Trips: React.FC<ISelectedProps> = ({ user, list, filter }) => {
 
   return (
     <div className="container">
-      <TripsFilter />
+      <TripsFilter filter={filter} />
       <div className="trips">
         <div className="trips_print-title -next-month" />
         {list.length > 0 ? (
