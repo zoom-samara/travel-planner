@@ -2,7 +2,7 @@ import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import React from 'react'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Redirect } from 'react-router-dom'
 import Loading from '../components/Loading/Loading'
 import store from '../store'
 import { setStatusUpdated, setUser } from './authActions'
@@ -12,7 +12,7 @@ Enzyme.configure({ adapter: new Adapter() })
 
 describe('Private Component', () => {
   it('By Default Should be Loading', () => {
-    const wrapper = Enzyme.shallow(
+    const wrapper = Enzyme.mount(
       <Provider store={store}>
         <BrowserRouter>
           <Private isPrivate={true} />
@@ -20,11 +20,13 @@ describe('Private Component', () => {
       </Provider>
     )
 
-    expect(wrapper.render()).toMatchObject(Enzyme.shallow(<Loading fullPage />).render())
+    expect(wrapper.containsMatchingElement(<Loading fullPage />)).toStrictEqual(true)
   })
 
   it('If user not auth', () => {
-    const wrapper = Enzyme.shallow(
+    store.dispatch(setStatusUpdated(true))
+
+    const wrapper = Enzyme.mount(
       <Provider store={store}>
         <BrowserRouter>
           <Private isPrivate={false}>
@@ -34,13 +36,13 @@ describe('Private Component', () => {
       </Provider>
     )
 
-    store.dispatch(setStatusUpdated(true))
-
-    expect(wrapper.render()).toMatchObject(Enzyme.shallow(<div>test</div>).render())
+    expect(wrapper.containsMatchingElement(<div>test</div>)).toStrictEqual(true)
   })
 
-  it('If user not auth in Private zone', () => {
-    const wrapper = Enzyme.shallow(
+  it('Not auth user should redirect on auth', () => {
+    store.dispatch(setStatusUpdated(true))
+
+    const wrapper = Enzyme.mount(
       <Provider store={store}>
         <BrowserRouter>
           <Private isPrivate={true}>
@@ -50,30 +52,31 @@ describe('Private Component', () => {
       </Provider>
     )
 
-    store.dispatch(setStatusUpdated(true))
-
-    expect(wrapper.render()).not.toMatchObject(Enzyme.shallow(<div>test</div>).render())
+    expect(wrapper.containsMatchingElement(<Redirect to="/auth/signin" />)).toStrictEqual(true)
   })
 
-  it('If user auth', () => {
-    const wrapper = Enzyme.shallow(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Private isPrivate={true}>
-            <div>test</div>
-          </Private>
-        </BrowserRouter>
-      </Provider>
-    )
-
+  it('If user already logged', () => {
     store.dispatch(setStatusUpdated(true))
     store.dispatch(setUser({ displayName: 'displayName', email: 'email', uid: '123' }))
 
-    expect(wrapper.render()).toMatchObject(Enzyme.shallow(<div>test</div>).render())
+    const wrapper = Enzyme.mount(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Private isPrivate={true}>
+            <div>test</div>
+          </Private>
+        </BrowserRouter>
+      </Provider>
+    )
+
+    expect(wrapper.containsMatchingElement(<div>test</div>)).toStrictEqual(true)
   })
 
-  it('If user auth in Sign zone', () => {
-    const wrapper = Enzyme.shallow(
+  it('Already logged user should visit Sign zone', () => {
+    store.dispatch(setStatusUpdated(true))
+    store.dispatch(setUser({ displayName: 'displayName', email: 'email', uid: '123' }))
+
+    const wrapper = Enzyme.mount(
       <Provider store={store}>
         <BrowserRouter>
           <Private isPrivate={false}>
@@ -83,9 +86,6 @@ describe('Private Component', () => {
       </Provider>
     )
 
-    store.dispatch(setStatusUpdated(true))
-    store.dispatch(setUser({ displayName: 'displayName', email: 'email', uid: '123' }))
-
-    expect(wrapper.render()).not.toMatchObject(Enzyme.shallow(<div>test</div>).render())
+    expect(wrapper.containsMatchingElement(<Redirect to="/service/trips" />)).toStrictEqual(true)
   })
 })
