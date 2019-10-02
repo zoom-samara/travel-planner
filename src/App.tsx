@@ -46,8 +46,10 @@ const App: React.FC = () => {
                 path="/service"
                 render={() => (
                   <Private isPrivate={true}>
-                    <Route path="/service/trips" component={Trips} />
-                    <Route path="/service/trip/:id" component={Trip} />
+                    <Switch>
+                      <Route path="/service/trips" component={Trips} />
+                      <Route path="/service/trip/:id" component={Trip} />
+                    </Switch>
                   </Private>
                 )}
               />
