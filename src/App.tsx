@@ -2,7 +2,7 @@ import { ConnectedRouter } from 'connected-react-router'
 import React from 'react'
 import { hot } from 'react-hot-loader/root'
 import { Provider } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 
 import history from './history'
 import store from './store'
@@ -38,6 +38,7 @@ const App: React.FC = () => {
                     <Switch>
                       <Route path="/auth/signin" component={Signin} />
                       <Route path="/auth/signup" component={Signup} />
+                      <Redirect to="/auth/signin" />
                     </Switch>
                   </Private>
                 )}
@@ -49,6 +50,7 @@ const App: React.FC = () => {
                     <Switch>
                       <Route path="/service/trips" component={Trips} />
                       <Route path="/service/trip/:id" component={Trip} />
+                      <Redirect to="/service/trips" />
                     </Switch>
                   </Private>
                 )}
