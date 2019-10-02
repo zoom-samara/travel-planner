@@ -8,6 +8,7 @@ export interface INewTrip {
 export interface ITrip extends INewTrip {
   id: string
   uid: string
+  exists?: boolean
 }
 
 export interface ITripsFilter {

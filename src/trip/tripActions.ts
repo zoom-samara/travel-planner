@@ -21,6 +21,7 @@ export const requestTripDetails = (id: string): ThunkAction<Promise<void>> => (d
       dispatch(
         setTrip(({
           id: doc.id,
+          exists: doc.exists,
           ...doc.data(),
         } as any) as ITrip)
       )

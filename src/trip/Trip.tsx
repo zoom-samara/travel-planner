@@ -34,6 +34,21 @@ const Trip: React.FC<RouteComponentProps<IRouteParams> & ISelectedProps> = ({ ma
     return <Loading fullPage />
   }
 
+  if (!trip.exists) {
+    return (
+      <div className="container">
+        <div className="trip">
+          <div className="trip_title">
+            <Link to="/service/trips" className="trip_back">
+              &larr; Back to list
+            </Link>
+            <h1>Trip Not Exists</h1>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="container">
       <div className="trip">
