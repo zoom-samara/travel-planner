@@ -1,5 +1,5 @@
 import { Formik } from 'formik'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { connect } from 'react-redux'
 import createTypedStructuredSelector from '../common/createTypedStructuredSelector'
 import useThunkDispatch from '../common/useThunkDispatch'
@@ -12,28 +12,44 @@ interface ISelectedProps {
   trip: ITrip
 }
 const EditTrip: React.FC<ISelectedProps> = ({ trip }) => {
-  const [isEdit, onToggleEdit] = useState(false)
+  const [isEdit, toggleEdit] = useState(false)
   const dispatch = useThunkDispatch()
-  const onRemove = async (id: string) => {
+
+  const onRemove = useCallback(async () => {
+    window.confirm('Do you really want to remove the trip?')
+
     try {
-      await dispatch(requestRemoveTrip(id))
+      await dispatch(requestRemoveTrip(trip.id))
     } catch (err) {
       window.alert(err)
     }
-  }
+  }, [trip, dispatch])
+
+  const onToggleEdit = useCallback(() => {
+    toggleEdit(!isEdit)
+  }, [isEdit])
+
+  const onSubmit = useCallback(
+    (values, { setSubmitting, setStatus }) => {
+      setSubmitting(true)
+      dispatch(requestUpdateTrip(trip.id, values))
+        .then(() => {
+          toggleEdit(false)
+        })
+        .catch(({ message }: { message: string }) => setStatus(message))
+        .finally(() => setSubmitting(false))
+    },
+    [dispatch, trip]
+  )
 
   return (
     <div className="edit-trip">
       <div className="edit-trip_buttons">
-        <button type="button" className="edit-trip_control -edit" onClick={() => onToggleEdit(!isEdit)}>
+        <button type="button" className="edit-trip_control -edit" onClick={onToggleEdit}>
           Edit Trip
         </button>
 
-        <button
-          type="button"
-          className="edit-trip_control -remove"
-          onClick={() => window.confirm('Do you really want to remove the trip?') && onRemove(trip.id)}
-        >
+        <button type="button" className="edit-trip_control -remove" onClick={onRemove}>
           Remove Trip
         </button>
       </div>
@@ -48,15 +64,7 @@ const EditTrip: React.FC<ISelectedProps> = ({ trip }) => {
               endDate: trip.endDate,
               startDate: trip.startDate,
             }}
-            onSubmit={(values, { setSubmitting, setStatus }) => {
-              setSubmitting(true)
-              dispatch(requestUpdateTrip(trip.id, values))
-                .then(() => {
-                  onToggleEdit(false)
-                })
-                .catch(({ message }: { message: string }) => setStatus(message))
-                .finally(() => setSubmitting(false))
-            }}
+            onSubmit={onSubmit}
           >
             {TripForm}
           </Formik>

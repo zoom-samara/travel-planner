@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from 'formik'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { requestSignIn } from './authActions'
@@ -7,20 +7,22 @@ import { requestSignIn } from './authActions'
 const Signin: React.FC = () => {
   const dispatch = useDispatch()
 
+  const onSubmit = useCallback(
+    async (values, { setSubmitting, setStatus }) => {
+      setSubmitting(true)
+      try {
+        await dispatch(requestSignIn(values))
+      } catch ({ message }) {
+        setStatus(message)
+        setSubmitting(false)
+      }
+    },
+    [dispatch]
+  )
+
   return (
     <div className="container">
-      <Formik
-        initialValues={{ email: '', password: '' }}
-        onSubmit={async (values, { setSubmitting, setStatus }) => {
-          setSubmitting(true)
-          try {
-            await dispatch(requestSignIn(values))
-          } catch ({ message }) {
-            setStatus(message)
-            setSubmitting(false)
-          }
-        }}
-      >
+      <Formik initialValues={{ email: '', password: '' }} onSubmit={onSubmit}>
         {({ isSubmitting, status }) => (
           <Form className="auth">
             <h1 className="auth_title">Sign In</h1>
