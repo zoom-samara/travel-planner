@@ -1,3 +1,4 @@
+import { FirebaseError } from 'firebase/app'
 import { Formik } from 'formik'
 import React, { useCallback } from 'react'
 import useThunkDispatch from '../common/useThunkDispatch'
@@ -13,7 +14,7 @@ const AddTrip: React.FC = () => {
 
       dispatch(requestCreateTrip(values))
         .then(() => resetForm())
-        .catch(({ message }: { message: string }) => setStatus(message))
+        .catch(({ message }: FirebaseError) => setStatus(message))
         .finally(() => setSubmitting(false))
     },
     [dispatch]

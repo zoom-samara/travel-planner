@@ -1,3 +1,4 @@
+import { FirebaseError } from 'firebase/app'
 import { Field, Form, Formik } from 'formik'
 import React, { useCallback } from 'react'
 import { Link } from 'react-router-dom'
@@ -15,7 +16,7 @@ const Signup: React.FC = () => {
         .then(() => {
           history.push('/service/trips')
         })
-        .catch(({ message }: any) => {
+        .catch(({ message }: FirebaseError) => {
           setStatus(message)
         })
         .finally(() => setSubmitting(false))

@@ -1,3 +1,4 @@
+import { FirebaseError } from 'firebase/app'
 import { Formik } from 'formik'
 import React, { useCallback, useState } from 'react'
 import { connect } from 'react-redux'
@@ -22,7 +23,7 @@ const EditTrip: React.FC<ISelectedProps> = ({ trip }) => {
         .then(() => {
           history.push('/service/trips')
         })
-        .catch((err) => window.alert(err))
+        .catch((err: FirebaseError) => window.alert(err))
     }
   }, [trip, dispatch])
 
@@ -37,7 +38,7 @@ const EditTrip: React.FC<ISelectedProps> = ({ trip }) => {
         .then(() => {
           toggleEdit(false)
         })
-        .catch(({ message }: { message: string }) => setStatus(message))
+        .catch(({ message }: FirebaseError) => setStatus(message))
         .finally(() => setSubmitting(false))
     },
     [dispatch, trip]
