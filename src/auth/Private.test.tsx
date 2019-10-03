@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Redirect } from 'react-router-dom'
 import Loading from '../components/Loading/Loading'
 import store from '../store'
-import { setStatusUpdated, setUser } from './authActions'
+import { setAuthUpdated, setUser } from './authActions'
 import Private from './Private'
 
 Enzyme.configure({ adapter: new Adapter() })
@@ -24,7 +24,7 @@ describe('Private Component', () => {
   })
 
   it('If user not auth', () => {
-    store.dispatch(setStatusUpdated(true))
+    store.dispatch(setAuthUpdated(true))
 
     const wrapper = Enzyme.mount(
       <Provider store={store}>
@@ -40,7 +40,7 @@ describe('Private Component', () => {
   })
 
   it('Not auth user should redirect on auth', () => {
-    store.dispatch(setStatusUpdated(true))
+    store.dispatch(setAuthUpdated(true))
 
     const wrapper = Enzyme.mount(
       <Provider store={store}>
@@ -56,7 +56,7 @@ describe('Private Component', () => {
   })
 
   it('If user already logged', () => {
-    store.dispatch(setStatusUpdated(true))
+    store.dispatch(setAuthUpdated(true))
     store.dispatch(setUser({ displayName: 'displayName', email: 'email', uid: '123' }))
 
     const wrapper = Enzyme.mount(
@@ -73,7 +73,7 @@ describe('Private Component', () => {
   })
 
   it('Already logged user should visit Sign zone', () => {
-    store.dispatch(setStatusUpdated(true))
+    store.dispatch(setAuthUpdated(true))
     store.dispatch(setUser({ displayName: 'displayName', email: 'email', uid: '123' }))
 
     const wrapper = Enzyme.mount(
