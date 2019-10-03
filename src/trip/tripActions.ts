@@ -10,7 +10,7 @@ export const SET_TRIP = 'TRIP/SET'
 export type SET_TRIP = Action<ITrip>
 export const setTrip = createAction<ITrip, ITrip>(SET_TRIP, identity)
 
-export const requestTripDetails = (id: string): ThunkAction<Promise<void>> => (dispatch) =>
+export const requestReadTripDetails = (id: string): ThunkAction<Promise<void>> => (dispatch) =>
   firebase
     .firestore()
     .collection('trips')
@@ -33,10 +33,10 @@ export const requestUpdateTrip = (id: string, data: INewTrip): ThunkAction<Promi
     .collection('trips')
     .doc(id)
     .update(data)
-    .then(() => dispatch(requestTripDetails(id)))
+    .then(() => dispatch(requestReadTripDetails(id)))
     .catch((err) => Promise.reject(err))
 
-export const requestRemoveTrip = (id: string): ThunkAction<Promise<void>> => () =>
+export const requestDeleteTrip = (id: string): ThunkAction<Promise<void>> => () =>
   firebase
     .firestore()
     .collection('trips')

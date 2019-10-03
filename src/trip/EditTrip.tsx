@@ -7,7 +7,7 @@ import useThunkDispatch from '../common/useThunkDispatch'
 import history from '../history'
 import TripForm from '../trips/TripForm'
 import { ITrip } from '../types/trip'
-import { requestRemoveTrip, requestUpdateTrip } from './tripActions'
+import { requestDeleteTrip, requestUpdateTrip } from './tripActions'
 import { tripSelector } from './tripSelector'
 
 interface ISelectedProps {
@@ -19,7 +19,7 @@ const EditTrip: React.FC<ISelectedProps> = ({ trip }) => {
 
   const onRemove = useCallback(async () => {
     if (window.confirm('Do you really want to remove the trip?')) {
-      dispatch(requestRemoveTrip(trip.id))
+      dispatch(requestDeleteTrip(trip.id))
         .then(() => {
           history.push('/service/trips')
         })
