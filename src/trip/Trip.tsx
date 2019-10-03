@@ -9,7 +9,7 @@ import Loading from '../components/Loading/Loading'
 import { ITrip } from '../types/trip'
 import { IUser } from '../types/user'
 import EditTrip from './EditTrip'
-import { requestTripDetails } from './tripActions'
+import { requestReadTripDetails } from './tripActions'
 import { tripSelector } from './tripSelector'
 
 interface IRouteParams {
@@ -27,7 +27,7 @@ const Trip: React.FC<RouteComponentProps<IRouteParams> & ISelectedProps> = ({ ma
   const dispatch = useThunkDispatch()
 
   useEffect(() => {
-    dispatch(requestTripDetails(id)).then(() => setLoading(false))
+    dispatch(requestReadTripDetails(id)).then(() => setLoading(false))
   }, [dispatch, id])
 
   if (loading) {

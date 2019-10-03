@@ -4,7 +4,7 @@ import { Redirect } from 'react-router'
 import createTypedStructuredSelector from '../common/createTypedStructuredSelector'
 import Loading from '../components/Loading/Loading'
 import { IUser } from '../types/user'
-import { authStatusSelector, userSelector } from './authSelector'
+import { authUpdatedStatusSelector, userSelector } from './authSelector'
 
 interface IPrivateProps {
   isPrivate: boolean
@@ -12,11 +12,11 @@ interface IPrivateProps {
 
 interface ISelectedProps {
   user: IUser
-  meta: boolean
+  isAuthUpdated: boolean
 }
 
-const Private: React.FC<IPrivateProps & ISelectedProps> = ({ children, isPrivate, user, meta }) => {
-  if (!meta) {
+const Private: React.FC<IPrivateProps & ISelectedProps> = ({ children, isPrivate, user, isAuthUpdated }) => {
+  if (!isAuthUpdated) {
     return <Loading fullPage />
   }
 
@@ -34,6 +34,6 @@ const Private: React.FC<IPrivateProps & ISelectedProps> = ({ children, isPrivate
 export default connect(
   createTypedStructuredSelector<ISelectedProps>({
     user: userSelector,
-    meta: authStatusSelector,
+    isAuthUpdated: authUpdatedStatusSelector,
   })
 )(Private)

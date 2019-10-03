@@ -1,6 +1,6 @@
 import { faPrint } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { memo } from 'react'
+import React, { memo, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { ITripsFilter } from '../types/trip'
 import { setFilter } from './tripsActions'
@@ -12,9 +12,12 @@ interface ITripsFilterProps {
 const TripsFilter: React.FC<ITripsFilterProps> = ({ filter }) => {
   const dispatch = useDispatch()
 
-  const updateFilter = (values: ITripsFilter) => {
-    dispatch(setFilter(values))
-  }
+  const updateFilter = useCallback(
+    (values: ITripsFilter) => {
+      dispatch(setFilter(values))
+    },
+    [dispatch]
+  )
 
   return (
     <section className="filter">
@@ -48,7 +51,7 @@ const TripsFilter: React.FC<ITripsFilterProps> = ({ filter }) => {
         <div className="filter_sep" />
 
         <div className="filter_col -print">
-          <button className="filter_print" id="printTrips" onClick={() => window.print()}>
+          <button className="filter_print" id="printTrips" onClick={window.print}>
             <span className="filter_print-label">Print next month plan</span>
             <FontAwesomeIcon icon={faPrint} />
           </button>

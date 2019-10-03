@@ -1,26 +1,32 @@
+import { FirebaseError } from 'firebase/app'
 import { Field, Form, Formik } from 'formik'
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import useThunkDispatch from '../common/useThunkDispatch'
+import history from '../history'
 import { requestSignIn } from './authActions'
 
 const Signin: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useThunkDispatch()
+
+  const onSubmit = useCallback(
+    (values, { setSubmitting, setStatus }) => {
+      setSubmitting(true)
+      dispatch(requestSignIn(values))
+        .then(() => {
+          history.push('/service/trips')
+        })
+        .catch(({ message }: FirebaseError) => {
+          setStatus(message)
+        })
+        .finally(() => setSubmitting(false))
+    },
+    [dispatch]
+  )
 
   return (
     <div className="container">
-      <Formik
-        initialValues={{ email: '', password: '' }}
-        onSubmit={async (values, { setSubmitting, setStatus }) => {
-          setSubmitting(true)
-          try {
-            await dispatch(requestSignIn(values))
-          } catch ({ message }) {
-            setStatus(message)
-            setSubmitting(false)
-          }
-        }}
-      >
+      <Formik initialValues={{ email: '', password: '' }} onSubmit={onSubmit}>
         {({ isSubmitting, status }) => (
           <Form className="auth">
             <h1 className="auth_title">Sign In</h1>

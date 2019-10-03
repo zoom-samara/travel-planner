@@ -45,7 +45,7 @@ export const requestCreateTrip = (trip: INewTrip): ThunkAction<Promise<void>> =>
     })
     .catch((err) => Promise.reject(err))
 
-export const getTripsList = (): ThunkAction<Promise<void>> => (dispatch) =>
+export const requestReadTripsList = (): ThunkAction<Promise<void>> => (dispatch) =>
   firebase
     .firestore()
     .collection('trips')

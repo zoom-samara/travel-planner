@@ -1,11 +1,13 @@
 import { faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
-import { connect, useDispatch } from 'react-redux'
+import React, { useCallback } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { requestLogout } from '../../auth/authActions'
 import { userSelector } from '../../auth/authSelector'
 import createTypedStructuredSelector from '../../common/createTypedStructuredSelector'
+import useThunkDispatch from '../../common/useThunkDispatch'
+import history from '../../history'
 import { IUser } from '../../types/user'
 
 interface ISelectedProps {
@@ -13,7 +15,14 @@ interface ISelectedProps {
 }
 
 const Header: React.FC<ISelectedProps> = ({ user }) => {
-  const dispatch = useDispatch()
+  const dispatch = useThunkDispatch()
+
+  const onLogout = useCallback(() => {
+    dispatch(requestLogout()).then(() => {
+      history.push('/auth/signin')
+    })
+  }, [dispatch])
+
   return (
     <div className="container">
       <header className="header">
@@ -29,7 +38,7 @@ const Header: React.FC<ISelectedProps> = ({ user }) => {
                 <FontAwesomeIcon className="profile_user-icon" icon={faUser} />
                 {user.displayName}
               </div>
-              <button className="profile_logout" onClick={() => dispatch(requestLogout())}>
+              <button className="profile_logout" onClick={onLogout}>
                 <FontAwesomeIcon icon={faSignOutAlt} />
               </button>
             </>

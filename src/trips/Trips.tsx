@@ -7,7 +7,7 @@ import Loading from '../components/Loading/Loading'
 import { ITrip, ITripsFilter } from '../types/trip'
 import { IUser } from '../types/user'
 import AddTrip from './AddTrip'
-import { getTripsList } from './tripsActions'
+import { requestReadTripsList } from './tripsActions'
 import TripsFilter from './TripsFilter'
 import TripsItem from './TripsItem'
 import { filteredTripsSelector, filterTripsSelector } from './tripsSelector'
@@ -23,7 +23,7 @@ const Trips: React.FC<ISelectedProps> = ({ user, list, filter }) => {
   const dispatch = useThunkDispatch()
 
   useEffect(() => {
-    dispatch(getTripsList()).then(() => setLoading(false))
+    dispatch(requestReadTripsList()).then(() => setLoading(false))
   }, [dispatch])
 
   return (
