@@ -1,21 +1,24 @@
 import { Field, Form, Formik } from 'formik'
 import React, { useCallback } from 'react'
-import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import useThunkDispatch from '../common/useThunkDispatch'
+import history from '../history'
 import { requestSignUp } from './authActions'
 
 const Signup: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useThunkDispatch()
 
   const onSubmit = useCallback(
-    async (values, { setSubmitting, setStatus }) => {
+    (values, { setSubmitting, setStatus }) => {
       setSubmitting(true)
-      try {
-        await dispatch(requestSignUp(values))
-      } catch ({ message }) {
-        setStatus(message)
-        setSubmitting(false)
-      }
+      dispatch(requestSignUp(values))
+        .then(() => {
+          history.push('/service/trips')
+        })
+        .catch(({ message }: any) => {
+          setStatus(message)
+        })
+        .finally(() => setSubmitting(false))
     },
     [dispatch]
   )

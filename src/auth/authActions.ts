@@ -7,8 +7,6 @@ import { createAction } from 'redux-actions'
 import { Action, ThunkAction } from '../types/common'
 import { IAuthUser, IUser } from '../types/user'
 
-import history from '../history'
-
 export const SET_USER = 'AUTH/SET_USER'
 export type SET_USER = Action<IUser>
 export const setUser = createAction<IUser, IUser>(SET_USER, identity)
@@ -21,7 +19,6 @@ export const CLEAR_STATE = 'CLEAR_STATE'
 export type CLEAR_STATE = Action<null>
 export const clearState = (): ThunkAction<void> => (dispatch) => {
   dispatch({ type: CLEAR_STATE, payload: null })
-  history.push('/auth/signin')
 }
 
 export const requestCurrentUser = (): ThunkAction<void> => (dispatch) => {
@@ -58,7 +55,6 @@ export const requestSignIn = (userData: IAuthUser): ThunkAction<Promise<void>> =
     .then(({ user }) => {
       if (user) {
         dispatch(setUser(user as IUser))
-        history.push('/service/trips')
       }
     })
     .catch((err) => Promise.reject(err))
@@ -75,7 +71,6 @@ export const requestSignUp = (newUser: IAuthUser): ThunkAction<Promise<void>> =>
           })
           .then(() => {
             dispatch(setUser(user as IUser))
-            history.push('/service/trips')
           })
           .catch((err) => Promise.reject(err))
       }

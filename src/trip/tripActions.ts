@@ -3,7 +3,6 @@ import 'firebase/firestore'
 import { identity } from 'lodash/fp'
 import { createAction } from 'redux-actions'
 
-import history from '../history'
 import { Action, ThunkAction } from '../types/common'
 import { INewTrip, ITrip } from '../types/trip'
 
@@ -43,7 +42,4 @@ export const requestRemoveTrip = (id: string): ThunkAction<Promise<void>> => () 
     .collection('trips')
     .doc(id)
     .delete()
-    .then(() => {
-      history.push('/service/trips')
-    })
     .catch((err) => Promise.reject(err))

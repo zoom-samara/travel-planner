@@ -3,6 +3,7 @@ import React, { useCallback, useState } from 'react'
 import { connect } from 'react-redux'
 import createTypedStructuredSelector from '../common/createTypedStructuredSelector'
 import useThunkDispatch from '../common/useThunkDispatch'
+import history from '../history'
 import TripForm from '../trips/TripForm'
 import { ITrip } from '../types/trip'
 import { requestRemoveTrip, requestUpdateTrip } from './tripActions'
@@ -16,12 +17,12 @@ const EditTrip: React.FC<ISelectedProps> = ({ trip }) => {
   const dispatch = useThunkDispatch()
 
   const onRemove = useCallback(async () => {
-    window.confirm('Do you really want to remove the trip?')
-
-    try {
-      await dispatch(requestRemoveTrip(trip.id))
-    } catch (err) {
-      window.alert(err)
+    if (window.confirm('Do you really want to remove the trip?')) {
+      dispatch(requestRemoveTrip(trip.id))
+        .then(() => {
+          history.push('/service/trips')
+        })
+        .catch((err) => window.alert(err))
     }
   }, [trip, dispatch])
 

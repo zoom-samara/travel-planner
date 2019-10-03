@@ -1,11 +1,13 @@
 import { faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useCallback } from 'react'
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { requestLogout } from '../../auth/authActions'
 import { userSelector } from '../../auth/authSelector'
 import createTypedStructuredSelector from '../../common/createTypedStructuredSelector'
+import useThunkDispatch from '../../common/useThunkDispatch'
+import history from '../../history'
 import { IUser } from '../../types/user'
 
 interface ISelectedProps {
@@ -13,10 +15,12 @@ interface ISelectedProps {
 }
 
 const Header: React.FC<ISelectedProps> = ({ user }) => {
-  const dispatch = useDispatch()
+  const dispatch = useThunkDispatch()
 
   const onLogout = useCallback(() => {
-    dispatch(requestLogout())
+    dispatch(requestLogout()).then(() => {
+      history.push('/auth/signin')
+    })
   }, [dispatch])
 
   return (
