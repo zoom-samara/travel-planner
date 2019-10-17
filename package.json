@@ -27,8 +27,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "typescript": "3.6.3",
-    "yup": "^0.27.0"
+    "typescript": "3.6.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -86,7 +85,6 @@
     "@types/redux-thunk": "^2.1.0",
     "@types/reselect": "^2.2.0",
     "@types/webpack-env": "^1.14.0",
-    "@types/yup": "^0.26.24",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "husky": "^3.0.7",
