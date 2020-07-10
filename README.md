@@ -1,5 +1,5 @@
 ## Tests status
-[![CircleCI](https://circleci.com/gh/zoom-samara/travel-planner.svg?style=svg)](https://circleci.com/gh/zoom-samara/travel-planner)
+[![CircleCI](https://circleci.com/gh/ebulgakov/travel-planner.svg?style=svg)](https://circleci.com/gh/ebulgakov/travel-planner)
 
 ## Current staging
 Current staging is available on Firebase: https://travel-planner-49309.firebaseapp.com
